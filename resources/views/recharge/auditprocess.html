@@ -1,0 +1,76 @@
+<div class="modal-demo">
+	<div class="modal-header">
+		<h3 class="modal-title" id="modal-title">充值流程详情</h3>
+	</div>
+	<form>
+		<div class="modal-body" id="modal-body">
+			<div class="form-row">
+				<div class="form-group col">
+					<label for="recharger">被充值用户</label>
+					<input type="text" ng-model="basedata.recharger" class="form-control" id="recharger" readonly>
+				</div>
+				<div class="form-group col">
+					<label for="money">充值金额</label>
+					<input type="text" ng-model="basedata.money" class="form-control" id="money" readonly>
+				</div>
+			</div>
+			<div class="form-row align-items-end">
+				<div class="form-group col">
+					<label for="fromUserName">充值人</label>
+					<input type="text" ng-model="basedata.fromUserName" class="form-control" id="fromUserName" readonly>
+				</div>
+				<div class="form-group col">
+					<label for="company">公司</label>
+					<input type="text" ng-model="basedata.company" class="form-control" id="company" readonly>
+				</div>
+				<!--<div class="form-group col">
+			      	<div class="pretty p-icon p-square  mr-2">
+	                    <input type="checkbox" value="label" id="recent"/>
+	                    <div class="state p-success">
+	                        <i class="icon fa fa-check"></i>
+	                        <label for="recent">勾选默认财务为充值人</label>
+	                    </div>
+	                </div>
+			    </div>-->
+			</div>
+			<div class="form-row">
+
+				<div class="form-group col">
+					<label for="payType">付款方式</label>
+					<select class="form-control" id="payType" ng-model="basedata.payType" disabled>
+						<option value="">请选择</option>
+						<option value="1">预付费</option>
+						<option value="2">后付费</option>
+					</select>
+				</div>
+				<div class="form-group col">
+					<label for="status">流程状态</label>
+					<select ng-model="basedata.status" class="form-control" id="status" disabled>
+						<option value="">未结束</option>
+						<option value="1">未审核</option>
+						<option value="2">已审核</option>
+						<option value="3">已充值</option>
+					</select>
+				</div>
+			</div>			
+			<div class="form-row">
+				<div class="form-group col">
+					<label for="note">备注</label>
+					<textarea class="form-control" ng-model="basedata.remark" rows="3" id="note" readonly></textarea>
+				</div>
+				<div class="form-group col">
+					<label for="note">驳回原因</label>
+					<textarea class="form-control" ng-model="basedata.rejectMsg" rows="3" id="note" readonly></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer justify-content-center">
+			<button class="btn btn-sm btn-ensure" ng-if="basedata.status == 1&&SysPermission.showRecharge()" type="button" ng-click="auditAddMoneyFlow(2)">审核</button>
+			<button class="btn btn-sm btn-outline-warning" ng-if="basedata.status == 2&&SysPermission.showRecharge()" type="button" ng-click="auditAddMoneyFlow(1)">取消审核</button>
+			<button class="btn btn-sm btn-outline-success" ng-if="basedata.status == 2&&SysPermission.showRecharge()" type="button" ng-click="confirmrecharge()">立即充值</button>
+			<button class="btn btn-sm btn-outline-danger" ng-if="basedata.status == 1&&per.currentuser == basedata.recharger" type="button" ng-click="deleteProcess()">删除</button>
+			<button class="btn btn-sm btn-outline-danger" ng-if="basedata.status == 1&&SysPermission.showRecharge()" type="button" ng-click="rejectProcess()">驳回</button>
+			<button class="btn btn-sm btn-light btn-light-border" type="button" ng-click="cancel()">关闭</button>
+		</div>
+	</form>
+</div>

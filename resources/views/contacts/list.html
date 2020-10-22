@@ -1,0 +1,97 @@
+<div class="order-browse">
+    <div class="card">
+        <div class="card-header clearfix">                                
+            <ul class="order-list-type d-flex float-left">
+                <li class="list-item active"><a href>联系人列表</a></li>
+            </ul>
+            <div class="order-head-btn float-right d-flex pt-1">
+            	<div class="num-text">
+            		<b>{{searchdata.total}}</b> 条记录
+            	</div>
+            	<div class="btn-cont">
+            		<button type="button" class="btn btn-outline-info btn-sm" ng-click="addContacts()"> <i class="fa fa-plus"></i> 新增联系人</button>
+            		<button type="button" class="btn btn-outline-info btn-sm" ng-click="importContacts()"> <i class="fa fa-cloud-download"></i> 导入联系人</button>
+            		<a class="btn btn-link btn-sm" href="../../public/file/importcontact.xls" download="importcontact.xls" role="button">下载导入Excel模板</a>
+            		<a class="btn btn-link btn-sm" href="../../public/file/importcontact.csv" download="importcontact.csv" role="button">下载导入CSV模板</a>
+            	</div>
+            </div>
+        </div>
+        <div class="card-body order-body bg-fb">
+			<div class="user-list">
+				<form class="table-form" ng-submit="searchTable()">
+				  	<div class="d-flex">					   									
+					    <div class="form-group mr-2">
+					      	<label for="inputZip">联系人名称</label>
+					      	<input type="text" ng-model="searchdata.contactName" class="no-control form-control" placeholder="请输入">
+					    </div>					    
+					    <div class="form-group align-self-end">
+					      	<button type="submit" class="btn btn-sm ensure mr-2">查询</button>
+							<button type="button" class="btn btn-sm cancel" ng-click="resetForm()">重置</button>
+					    </div>
+					</div>
+			  	</form>
+			  	<div class="table-responsive">
+			  		<table class="table table-list table-hover">
+						<thead>
+						    <tr>
+						      	<th scope="col">名称</th>
+						      	<th scope="col">分组</th>
+						      	<th scope="col">手机号</th>
+						      	<th scope="col">备注</th>
+						      	<th scope="col">EMAIL</th>						      	
+						      	<th scope="col">操作</th>
+						    </tr>
+						</thead>
+						<tbody>
+							<tr ng-if="tablelistdata.data.length == 0"><td colspan="6">暂无数据</td></tr>
+						    <tr ng-if="tablelistdata.data.length > 0" ng-repeat="contract in tablelistdata.data">
+							    <td>{{contract.contactName}}</td>
+							    <td>{{contract.groupName}}</td>				    
+							    <td>{{contract.tel}}</td>
+							    <td>{{contract.remark}}</td>
+							    <td>{{contract.email}}</td>
+							    <td>
+							    	<button type="button" class="btn btn-xs btn-outline-info btn-oval mr-1" ng-click="modifyContacts(contract)">修改</button>
+							    	<button type="button" class="btn btn-xs btn-outline-danger btn-oval" ng-click="delectcontacts(contract)">删除</button>
+							    </td>			    		    
+						    </tr>
+						</tbody>
+					</table>
+					<div id="loading-container" ng-show="showloading == 0">
+							<div class="spinner">
+								<div class="spinner-container container1">
+								  <div class="circle1"></div>
+								  <div class="circle2"></div>
+								  <div class="circle3"></div>
+								  <div class="circle4"></div>
+								</div>
+								<div class="spinner-container container2">
+								  <div class="circle1"></div>
+								  <div class="circle2"></div>
+								  <div class="circle3"></div>
+								  <div class="circle4"></div>
+								</div>
+								<div class="spinner-container container3">
+								  <div class="circle1"></div>
+								  <div class="circle2"></div>
+								  <div class="circle3"></div>
+								  <div class="circle4"></div>
+								</div>
+							</div>
+						</div>
+			  	</div>
+			  	<div class="common-page mt-2 p-2 d-flex justify-content-center">
+			  		<ul class="pagination-sm mr-2" uib-pagination total-items="searchdata.total" boundary-link-numbers="true" rotate="true" items-per-page="searchdata.pageSize" ng-model="searchdata.currentPage" max-size="8" boundary-links="true" num-pages="numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="getContactList()"></ul> 
+			  		<form class="btn-page-cont" ng-submit="getContactList()">
+			  			<select class="btn-page-sel mr-2" ng-model="searchdata.pageSize" ng-change="searchTable()">
+			  				<option value="10">10条/页</option>
+			  				<option value="20">20条/页</option>
+			  				<option value="30">30条/页</option>
+			  			</select>
+			  			跳至  <input class="btn-page-input ml-2" ng-model="searchdata.currentPage" max="{{numPages}}" type="number" ng-change="getContactList()"/> 页
+			  		</form>
+			  	</div>
+			</div>
+        </div>
+    </div>
+</div>

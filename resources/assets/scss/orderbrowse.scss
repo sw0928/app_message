@@ -1,0 +1,61 @@
+.order-browse{
+    .pb-30{
+        min-width: 952px;
+        overflow-x: auto;
+        padding: {
+            bottom: 115px;
+        }
+    }
+    .common-list{
+        padding: 6px 0;
+        border: 1px solid #f0f4f8;
+    }
+    .order-list-type{
+        .list-item{
+            font-size: 15px;            
+            line-height: 40px;
+            margin: {
+                right: 30px;
+            }
+            a{
+                color: #93a0ad;
+            }
+            &.active{
+                font-size: 16px;
+                font-weight: bold;
+                a{
+                    padding: {
+                        bottom: 6px;
+                    }
+                    color: #4d4d4d;
+                    border: {
+                        bottom: 2px solid #3c84d2;
+                    }
+                }                
+            }
+        }
+    }
+    .order-head-btn{
+        .num-text{
+            margin-right: 16px;
+            line-height: 35px;
+            color: #758596;
+            b{
+                font-size: 24px;
+                color: #4d4d4d;
+            }
+        }
+        .btn-cont{
+            button{
+                padding: 0.25rem 1rem;
+                margin-top: 4px;
+            }
+        }
+    }
+    .card{
+        width: 100%;
+        .order-body{
+            
+        }
+    }
+}

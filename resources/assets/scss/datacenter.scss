@@ -1,0 +1,288 @@
+.data-center{
+    .bg-gray{
+        background:#fbfbfb;
+        li{
+            background:#fbfbfb;
+        }
+    }
+    .cont-tit{
+        color: #4f4f4f;
+        margin: {
+            bottom: 10px;
+        }
+    }
+    .cont-style{
+        padding: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 4px;
+    }
+    .chart-btns{
+        margin: {
+            bottom: 5px;
+        }
+        .btn-chart{
+            font-size: 14px;
+            padding: 2px 5px;
+            color: #29ABE4;
+            background: #fff;
+            border:1px solid #e1e7ec;
+        }
+        .menu-list{
+            padding-left: 15px;
+            li{
+                font-size: 12px;
+            }
+        }
+    }    
+    .chart-tit{
+        font-size: 14px;
+        color: #748596;
+        b{
+            margin-right: 10px;
+            font-weight: normal;
+            font-size: 22px;
+            color: #000;
+        }
+    }
+    .trans-volume{
+        margin: {
+            bottom: 15px;
+        }        
+    }
+    .remind-center{        
+        .remind-cont{
+            .remind-tit{
+                position: relative;
+                font-size: 14px;
+                color:#919eab;
+                margin: {
+                    right: 10px;
+                }
+                &:after{
+                    position: absolute;
+                    content:'';
+                    opacity: 0;
+                    width: 8px;
+                    height: 8px;
+                    top: 0;
+                    right: -10px;
+                    border-radius: 50%;
+                    background: red;
+                }
+                &.active{
+                    &:after{
+                        opacity: 1;
+                    }
+                    font-size: 18px;
+                    color: #000000;
+                }
+            }
+            .remind-head{
+                color: #8795a4;
+                .number{
+                    margin: {
+                        right: 15px;
+                    }
+                    font-size: 18px;
+                    color: #000000;
+                }
+                .remind-btn-list{
+                    .btn-remind{
+                        padding: 2px 5px;
+                        color: #29abe4;
+                        background: #fff;
+                        border:1px solid #29abe4;
+                    }
+                    .menu-list{
+                        padding-left: 15px;
+                        li{
+                            font-size: 12px;
+                        }
+                        &.menu-list-right{                            
+                            right: 0;
+                            left: auto;                            
+                        }
+                    }
+                }
+               
+            }
+            .remind-list{
+                height: 226px;
+                overflow-y: auto;
+                li{
+                    font-size: 14px;
+                    color: #738495;
+                    padding: 0.4rem 1.25rem;
+                    &:first-child{
+                        border-top: 0;
+                    }
+//                  &:last-child{
+//                      border-bottom: 0;
+//                  }
+                    span{
+                        color:#494949;
+                        margin: 0 15px;
+                        b{
+                            font-weight: normal;
+                            color: #3A83FF;
+                        }
+                    }
+                    a{
+                        font-size: 15px;
+                        color: #32AEE5;
+                        float: right;
+                        &:hover{
+                            color: #0056b3;
+                        }
+                    }
+                }
+            }
+            .credit-wrapper{
+                margin: {
+                    bottom: 14px;
+                }
+                .credit-list{
+                    .credit-cont{
+                        &:first-child{
+                            height: 58px;
+                            width: 90%;
+                            transition: all 1s;
+                            &.open{
+                                height: auto;
+                            }
+                        }
+                        &:last-child{
+                            width: 10%;
+                            .cont-item{
+                                width: 100%;
+                                padding-top: 10px;
+                            }
+                        }
+                        position:relative;
+                        overflow: hidden;                   
+                        .cont-item{
+                            width: 24%;
+                            margin: {
+                                bottom: 10px;
+                            }
+                            i.fa{
+                                font-size: 30px;
+                                color: #8795a4;
+                                cursor: pointer;
+                            }
+                            .top{
+                                margin: {
+                                    bottom: 10px;
+                                }
+                                color:#8795a4;
+                                font-size: 14px;
+                            }
+                            .bottom{                    
+                                color: #494949;
+                                font-size: 18px;
+                                span{
+                                    position: relative;                                
+                                    &::before{
+                                        position: absolute;
+                                        content:'';
+                                        width: 10px;
+                                        height: 10px;
+                                        border-radius: 50%;
+                                        background: #3c84d2;
+                                        top: 2px;
+                                        left: -15px;
+                                    }                                
+                                }
+                            }
+                        }                
+                    } 
+                }        
+            }
+            .credit-tit{
+                .top{
+                    margin-bottom: 6px;
+                    font-size: 14px;
+                    color: #73818e;
+                }   
+                .bottom{
+                    color: #494949;
+                    font-size: 18px;
+                    span{
+                        display: inline-block;
+                        position: relative;
+                        padding-left: 15px;
+                        line-height: 22px;                     
+                        &:before{
+                            position: absolute;
+                            top: 6px;
+                            left: -5px;
+                            content: '';
+                            width: 11px;
+                            height: 11px;
+                            background: #3c84d2;
+                        }
+                    }
+                }        
+                .left{
+                    font-size: 30px;
+                    color: #73818e;
+                }
+                .right{
+                    font-size: 34px;
+                    color: #e7e7e7;
+                }
+            }
+        }
+        .ISP-cont{
+            padding: 10px 10px 0;
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            border-radius: 4px;
+            .btn-conts{
+                margin: {
+                    bottom: 5px;
+                }
+                .btn-chart{
+                    padding: 2px 5px;
+                    color: #49b8e9;
+                    background: #fff;
+                    border:1px solid #e1e7ec;
+                }
+                .menu-list{
+                    padding-left: 15px;
+                    li{
+                        font-size: 12px;
+                    }
+                }
+            }
+            .ISP-tit{
+                .top{
+                   
+                    color:#8795a4;
+                    font-size: 14px;
+                }
+                .bottom{                    
+                    color: #494949;
+                    font-size: 20px;
+                    span{                        
+                        display: inline-block;
+                        margin: {
+                            bottom: 3px;
+                        }
+                        width: 10px;
+                        height: 10px;
+                        border-radius: 50%;                        
+                        &.color1{
+                            background: #8ec31e;
+                        }
+                        &.color2{
+                            background: #3a83ff;
+                        }
+                        &.color3{
+                            background: #84b2ff;
+                        }   
+                    }
+                }
+            }
+        }
+    }
+}

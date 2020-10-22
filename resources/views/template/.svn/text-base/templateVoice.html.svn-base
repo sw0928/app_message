@@ -1,0 +1,129 @@
+<div class="order-browse">
+	<div class="card">
+		<div class="card-header clearfix">
+			<ul class="order-list-type d-flex float-left">
+                <li ng-if="SysPermission.showTemplateList()" class="list-item" ui-sref-active="active"><a ui-sref="templateapply">模板申请列表</a></li>
+                <li ng-if="SysPermission.showVoiceList()" class="list-item" ui-sref-active="active"><a ui-sref="templateVoice">语音审核列表</a></li>
+                <li ng-if="SysPermission.showChainList()" class="list-item" ui-sref-active="active"><a ui-sref="templateChain">短链审核列表</a></li>
+            </ul>
+			<div class="order-head-btn float-right d-flex">
+				<div class="num-text">
+					<b>{{total}}</b> 条记录
+				</div>
+				<div class="btn-cont">
+					<button type="button" class="btn btn-outline-info btn-sm" ng-click="importVoice()"> <i class="fa fa-cloud-download"></i> 导入语音</button>
+				</div>
+			</div>
+		</div>
+		<div class="card-body order-body bg-fb">
+			<div class="user-list">
+				<form class="table-form" ng-submit="searchtable()">
+					<div class="d-flex">
+						<div class="form-group mr-1">
+							<label for="startDate">开始时间</label>
+							<div class="input-group input-group-sm">
+								<input def-laydate type="text" id="orderstartdate" datetype="datetime" ng-model="searchdata.startDate" placeholder="请选择日期" class="layui-input form-control" />
+								<div class="input-group-append">
+									<button class="btn btn-outline-secondary" type="button"><i class="fa fa-clock-o fa-time-icon"></i></button>
+								</div>
+							</div>
+						</div>
+						<div class="form-group mr-1">
+							<label for="endDate">结束时间</label>
+							<div class="input-group input-group-sm">
+								<input def-laydate type="text" id="orderenddate" datetype="datetime" ng-model="searchdata.endDate" placeholder="请选择日期" class="layui-input form-control" />
+								<div class="input-group-append">
+									<button class="btn btn-outline-secondary" type="button"><i class="fa fa-clock-o fa-time-icon"></i></button>
+								</div>
+							</div>
+						</div>
+						<div class="form-group mr-1">
+							<label for="status">审核状态</label>
+							<select id="status" ng-model="searchdata.status" class="form-control">
+								<option value="">请选择</option>
+								<option value="0">待审核</option>
+								<option value="1">审核通过</option>
+								<option value="2">不通过</option>
+							</select>
+						</div>
+						<div class="form-group align-self-end">
+							<button type="submit" class="btn btn-sm ensure mr-2">查询</button>
+							<button type="button" class="btn btn-sm cancel" ng-click="resetFrom()">重置</button>
+						</div>
+					</div>
+				</form>
+				<div class="table-responsive">
+					<table class="table table-list table-hover">
+						<thead>
+							<tr>
+								<th scope="col">用户名</th>
+								<th scope="col">文件名</th>
+								<th scope="col">创建时间</th>
+								<!--<th scope="col">语音时长</th>-->
+								<th scope="col">状态</th>
+								<th scope="col">操作</th>
+							</tr>
+						</thead>
+						<tbody ng-if="tablelistdata.data.length == 0">
+							<tr>
+								<td colspan="6">暂无数据</td>
+							</tr>
+						</tbody>
+						<tbody ng-if="tablelistdata.data.length > 0" ng-repeat="dataitem in tablelistdata.data">
+							<tr class="border-bottom-0">
+								<td>{{dataitem.userName}}</td>
+								<td>文件名</td>
+								<td class="text-nowrap">{{dataitem.createTime | limitTo:19 }}</td>
+								<!--<td>{{dataitem.fileTime}}</td>-->
+								<td>
+									<span ng-class="dataitem.status == 0?'text-warning':(dataitem.status == 1?'text-success':'text-danger')">
+							  {{dataitem.status == 0?'待审核':(dataitem.status == 1?'审核通过':'不通过')}}
+							</span>
+								</td>
+								<td>
+									<button ng-if="dataitem.status == 0" type="button" class="btn btn-xs btn-outline-success btn-oval" ng-click="showDetail(dataitem)">审核</button>
+									<button ng-if="dataitem.status != 0" type="button" class="btn btn-xs btn-outline-success btn-oval" ng-click="showDetail(dataitem)">查看</button>
+									<button type="button" class="btn btn-outline-danger btn-xs btn-oval" ng-click="deleteTemplate(dataitem)">删除</button>
+								</td>
+
+							</tr>
+						</tbody>
+					</table>
+					<div id="loading-container" ng-show="showloading == 0">
+						<div class="spinner">
+							<div class="spinner-container container1">
+								<div class="circle1"></div>
+								<div class="circle2"></div>
+								<div class="circle3"></div>
+								<div class="circle4"></div>
+							</div>
+							<div class="spinner-container container2">
+								<div class="circle1"></div>
+								<div class="circle2"></div>
+								<div class="circle3"></div>
+								<div class="circle4"></div>
+							</div>
+							<div class="spinner-container container3">
+								<div class="circle1"></div>
+								<div class="circle2"></div>
+								<div class="circle3"></div>
+								<div class="circle4"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="common-page mt-2 p-2 d-flex justify-content-center">
+					<ul class="pagination-sm mr-2" uib-pagination total-items="searchdata.total" boundary-link-numbers="true" rotate="true" items-per-page="searchdata.pageSize" ng-model="searchdata.currentPage" max-size="8" boundary-links="true" num-pages="numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="getTableList()"></ul>
+					<form class="btn-page-cont" ng-submit="getTableList()">
+						<select class="btn-page-sel mr-2" ng-model="searchdata.pageSize" ng-change="searchTable()">
+							<option value="10">10条/页</option>
+							<option value="20">20条/页</option>
+							<option value="30">30条/页</option>
+						</select>
+						跳至 <input ng-model="searchdata.currentPage" max="{{numPages}}" class="btn-page-input ml-2" type="number" ng-change="getTableList()" /> 页
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

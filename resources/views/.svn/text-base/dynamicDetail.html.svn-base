@@ -1,0 +1,68 @@
+
+<div class="modal-demo">   
+    <div class="modal-header justify-content-between">
+		<h3 class="modal-title" id="modal-title">浏览列表</h3>
+		<button type="button" class="btn btn-outline-close" ng-click="cancel()"><i class="fa fa-remove"></i></button>
+    </div>
+    <div class="modal-body" id="modal-body">
+    	<div class="order-browse">
+		    <div class="card">
+		        <div class="card-header clearfix">                                
+		            <ul class="order-list-type d-flex float-left">
+		                <li class="list-item" ng-class="tabletype == 1?'active':''" ng-click="tabletype = 1;getTableList()"><a href>详单列表</a></li>
+		                <!-- <li class="list-item" ng-class="tabletype == 2?'active':''" ng-click="tabletype = 2;getTableList()"><a href>查看回复</a></li> -->
+		            </ul>
+		        </div>
+		        <div class="card-body order-body bg-fb">
+					<div class="user-list">
+					  	<div class="table-responsive">
+					  		<table class="table table-list table-hover">
+								<thead>
+								    <tr>
+								      	<th scope="col" class="tc">手机号</th>	
+								      	<th scope="col" class="tc">内容</th>
+								    </tr>
+								</thead>
+								<tbody ng-if="tablelistdata.length == 0">
+									<tr><td colspan="2">暂无数据</td></tr>
+								</tbody>
+								<tbody ng-if="tablelistdata.length > 0" ng-repeat="dataitem in tablelistdata">										
+								    <tr class="border-bottom-0">
+									    <td class="tc">{{dataitem.phone}}</td>		
+									    <td class="tc">{{dataitem.content}}</td>
+								    </tr>				    
+								</tbody>							
+							</table>
+								<div id="loading-container" ng-show="showloading == 0">
+									<div class="spinner">
+										<div class="spinner-container container1">
+											<div class="circle1"></div>
+											<div class="circle2"></div>
+											<div class="circle3"></div>
+											<div class="circle4"></div>
+										</div>
+										<div class="spinner-container container2">
+											<div class="circle1"></div>
+											<div class="circle2"></div>
+											<div class="circle3"></div>
+											<div class="circle4"></div>
+										</div>
+										<div class="spinner-container container3">
+											<div class="circle1"></div>
+											<div class="circle2"></div>
+											<div class="circle3"></div>
+											<div class="circle4"></div>
+										</div>
+									</div>
+								</div>
+						  </div>		
+					</div>
+		        </div>
+		    </div>
+		</div>    	
+    </div>
+    <div class="modal-footer justify-content-center">
+         <button class="btn btn-sm btn-ensure" type="button" ng-click="ensure()">确定</button>
+        <button class="btn btn-sm btn-light btn-light-border" type="button" ng-click="cancel()">关闭</button>
+    </div>    
+</div>

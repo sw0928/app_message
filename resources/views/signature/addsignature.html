@@ -1,0 +1,59 @@
+<div class="modal-demo">  
+	<div class="modal-header justify-content-between">
+	    <h3 class="modal-title" id="modal-title">申请签名</h3>
+	    <button type="button" class="btn btn-outline-close" ng-click="cancel()"><i class="fa fa-remove"></i></button>
+	</div>
+	<form class="bg-fb" ng-submit="ensure()">
+		<div class="modal-content">	
+		    <div class="modal-body" id="modal-body">       
+		        <div class="form-row">
+				    <!--<div class="form-group col-md-4">
+				      	<label>申请人</label>
+				      	<input type="text" ng-model="signature.userName" disabled class="form-control" placeholder="请输入">
+				    </div>-->
+				    <div class="form-group col-md-4">
+							<label for="recharger">申请人</label>
+							<select class="form-control" ng-model="signature.userId" ng-options="x.userId as x.loginName for x in options">
+							</select>
+						</div>
+				    <div class="form-group col-md-4">
+				      	<label><em class="text-danger">*</em> 签名</label>
+				      	<input type="text" ng-model="signature.signName" class="form-control" required placeholder="请输入">
+				    </div>
+				    <div class="form-group col-md-4">
+				      	<label><em class="text-danger">*</em> 集团客户名称</label>
+				      	<input type="text" ng-model="signature.blocCustomerName" required class="form-control" placeholder="请输入">
+				    </div>
+				</div>
+				<div class="form-row">
+				    <div class="form-group col-md-4">
+				      	<label>行业类别</label>
+				      	<ui-select ng-model="signature.blocTrade" theme="bootstrap">
+			                <ui-select-match placeholder="选择行业类别...">{{$select.selected.trade_name}}</ui-select-match>
+			                <ui-select-choices repeat="item in industryCategory | filter: $select.search">
+			                    <div ng-bind-html="item.trade_name | highlight: $select.search"></div>
+			                </ui-select-choices>
+			            </ui-select>
+				    </div>
+				    <div class="form-group col-md-4">
+				      	<label>扩展号</label>
+				      	<input type="text" ng-model="signature.extensionNumber" class="form-control" placeholder="请输入">
+				    </div>
+				</div>
+				<div class="form-row">
+				    <div class="form-group col-md-12">
+				      	<label>备注</label>
+				      	<textarea ng-model="signature.remark" class="form-control" rows="5"></textarea>
+				    </div>
+				    <div class="col-md-12 text-danger">
+				    	* 签名需真实反应公司的法人名称以及业务经营范围
+				    </div>
+				</div>       
+		    </div>
+		    <div class="modal-footer justify-content-center">
+		        <button class="btn btn-sm btn-ensure" type="submit">确认申请</button>
+		        <button class="btn btn-sm btn-light btn-light-border" type="button" ng-click="cancel()">关闭</button>
+		    </div>
+	    </div>
+	</form>
+</div>

@@ -1,0 +1,802 @@
+<div class="modal-header justify-content-between">
+    <h3 class="modal-title" id="modal-title">用户规格</h3>
+    <button type="button" class="btn btn-outline-close" ng-click="cancel()"><i class="fa fa-remove"></i></button>
+</div>
+<form class="bg-fb" ng-submit="ensure()">
+    <div class="modal-body" id="modal-body">
+    	<uib-accordion>
+            <div uib-accordion-group class="panel-default mb-2">
+                <uib-accordion-heading>客户信息</uib-accordion-heading>
+                <div class="form-row">
+				    <div class="form-group col-md">
+				      	<label><em class="text-danger">*</em> 公司名</label>
+				      	<input type="text" class="form-control" placeholder="请输入">
+				    </div>	   
+				    <div class="form-group col-md">
+				      	<label><em class="text-danger">*</em> 地区</label>
+				      	<input type="text" class="form-control" placeholder="请输入">
+				    </div>			    
+				</div>
+                <div class="form-row">
+				    <div class="form-group col-md">
+						<label class="contractstartdate">合同起始日期</label>
+						<div class="input-group">
+							<input def-laydate type="text" id="contractstartdate" datetype="datetime" ng-model="searchdata.startDate" placeholder="请选择日期" class="layui-input form-control"/>
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="button"><i class="fa fa-clock-o fa-time-icon"></i></button>
+							</div>
+						</div>
+				    </div>	   
+				    <div class="form-group col-md">
+						<label class="contractenddate">合同终止日期</label>
+						<div class="input-group">
+							<input def-laydate type="text" id="contractenddate" datetype="datetime" ng-model="searchdata.endDate" placeholder="请选择日期" class="layui-input form-control"/>
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="button"><i class="fa fa-clock-o fa-time-icon"></i></button>
+							</div>
+						</div>
+				    </div>			    
+				</div>
+            </div>
+	        <div uib-accordion-group class="panel-default mb-2">
+	            <uib-accordion-heading>业务类型 </uib-accordion-heading>
+	            <div class="form-row">
+				    <div class="form-group col-6">
+				      	<label><em class="text-danger">*</em> 产品类型</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">短信</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">语音</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">USSD</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">彩信</label>
+			                    </div>
+			                </div>
+				      	</div>
+				    </div>	   
+				    <div class="form-group col-6">
+				      	<label><em class="text-danger">*</em> 可发类型</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">验证码</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">行业通知</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">营销短信</label>
+			                    </div>
+			                </div>
+				      	</div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label><em class="text-danger">*</em> 可发运营商</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">移动</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">联通</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">电信</label>
+			                    </div>
+			                </div>
+				      	</div>
+				    </div>
+				    <div class="form-group col-12">
+				      	<label><em class="text-danger">*</em>接入方式</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" name="accessmode" value="" id=""/>
+			                    <div class="state p-info">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">HTTP</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" name="accessmode" value="" id=""/>
+			                    <div class="state p-info">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">CMPP</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" name="accessmode" value="" id=""/>
+			                    <div class="state p-info">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">SGIP</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" name="accessmode" value="" id=""/>
+			                    <div class="state p-info">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">SMGP</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" name="accessmode" value="" id=""/>
+			                    <div class="state p-info">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">前台Web</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" name="accessmode" value="" id=""/>
+			                    <div class="state p-info">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">webservice</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" name="accessmode" value="" id=""/>
+			                    <div class="state p-info">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">其他</label>
+			                    </div>
+			                </div>
+				      	</div>
+				    </div>	
+				</div>
+				<div class="form-row">
+				    <div class="form-group col-md">
+				      	<label>自定义接口需求</label>
+				      	<input type="text" class="form-control" />
+				    </div>	
+			    </div>
+	        </div>
+       		<div uib-accordion-group class="panel-default mb-2">
+	            <uib-accordion-heading>签名与号码 </uib-accordion-heading>	            
+			    <div class="form-group row">
+			      	<label class="col-3"><em class="text-danger">*</em> 签名报备方式</label>
+			      	<div class="col-9 mt-2">
+			      		<div class="pretty p-icon p-curve">
+		                    <input type="checkbox" value="" id=""/>
+		                    <div class="state p-success">
+		                        <i class="icon fa fa-check"></i>
+		                        <label for="">签名申请</label>
+		                    </div>
+		                </div>
+		                <div class="pretty p-icon p-curve">
+		                    <input type="checkbox" value="" id=""/>
+		                    <div class="state p-success">
+		                        <i class="icon fa fa-check"></i>
+		                        <label for="">模板申请</label>
+		                    </div>
+		                </div>
+		                <div class="pretty p-icon p-curve">
+		                    <input type="checkbox" value="" id=""/>
+		                    <div class="state p-success">
+		                        <i class="icon fa fa-check"></i>
+		                        <label for="">自定义</label>
+		                    </div>
+		                </div>
+			      	</div>
+			    </div>
+			    <div class="form-group row mb-0">
+			    	<label class="col-3"> 固定签名</label>
+			    	<div class="col-9">
+			    		<input type="text" class="form-control" id="" value="" />
+			    	</div>			    	
+			    </div>
+			    <div class="form-group row">
+			    	<label class="col-3"></label>
+			      	<div class="col-9 mt-2">
+			      		<div class="pretty p-icon p-round">
+		                    <input type="radio" value="" id=""/>
+		                    <div class="state p-success">
+		                        <i class="icon fa fa-check"></i>
+		                        <label for="">固定前置</label>
+		                    </div>
+		                </div>
+		                <div class="pretty p-icon p-round">
+		                    <input type="radio" value="" id=""/>
+		                    <div class="state p-success">
+		                        <i class="icon fa fa-check"></i>
+		                        <label for="">固定后置</label>
+		                    </div>
+		                </div>
+		                <div class="pretty p-icon p-round">
+		                    <input type="radio" value="" id=""/>
+		                    <div class="state p-success">
+		                        <i class="icon fa fa-check"></i>
+		                        <label for="">自动替换</label>
+		                    </div>
+		                </div>
+		                <div class="pretty p-icon p-round">
+		                    <input type="radio" value="" id=""/>
+		                    <div class="state p-success">
+		                        <i class="icon fa fa-check"></i>
+		                        <label for="">只支持中文签名</label>
+		                    </div>
+		                </div>
+			      	</div>
+			    </div>
+			    <div class="form-group row">
+			    	<label class="col-3">固定尾签</label>
+			    	<div class="col-9">
+			    		<input type="text" class="form-control" id="" value="" />
+			    	</div>			    	
+			    </div>
+			    <div class="form-group row">
+			    	<label class="col-3">主码</label>
+			    	<div class="col-9">
+			      		<div class="mb-2">
+			      			<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">不限制</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">三网合一</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">专享</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">码池</label>
+			                    </div>
+			                </div>
+			      		</div>
+			    		<input type="text" class="form-control" id="" value="" />
+			    	</div>			    	
+			    </div>
+			    <div class="form-group row">
+			    	<label class="col-3">扩展码位数</label>
+			    	<div class="col-9">
+			    		<input type="text" class="form-control" id="" value="" />
+			    	</div>			    	
+			    </div>
+			    <div class="form-group row">
+			    	<label class="col-3">指定扩展码</label>
+			    	<div class="col-9">
+			    		<input type="text" class="form-control" id="" value="" />
+			    	</div>			    	
+			    </div>
+	        </div>
+	        <div uib-accordion-group class="panel-default mb-2">
+	            <uib-accordion-heading>功能支持 </uib-accordion-heading>
+	            <div class="form-row">
+				    <div class="form-group col-6">
+				      	<label> 长短信</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">是</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">否</label>
+			                    </div>
+			                </div>			                
+				      	</div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 上行</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">是</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">否</label>
+			                    </div>
+			                </div>			                
+				      	</div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 英文短信</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">是</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">否</label>
+			                    </div>
+			                </div>			                
+				      	</div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 英文按140长度计费</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">是</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">否</label>
+			                    </div>
+			                </div>			                
+				      	</div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 回执按下单端口回传</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">是</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">否</label>
+			                    </div>
+			                </div>			                
+				      	</div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 超时营销转定时</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">是</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">否</label>
+			                    </div>
+			                </div>			                
+				      	</div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 支持VIP</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">是</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">否</label>
+			                    </div>
+			                </div>			                
+				      	</div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> VIP是否完全不受限制</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">是</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">否</label>
+			                    </div>
+			                </div>			                
+				      	</div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 国际短信</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">是</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">否</label>
+			                    </div>
+			                </div>			                
+				      	</div>
+				    </div>
+				    <div class="form-group col-12">
+				      	<label> 支持的国际地区</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">港澳台</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">东南亚</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">欧洲</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">澳洲</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">美洲</label>
+			                    </div>
+			                </div>
+				      	</div>
+				    </div>
+				    <div class="form-group col-12">
+				      	<label> 签名支持</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">中文前置</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">中文后置</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">英文前置</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-curve">
+			                    <input type="checkbox" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">英文后置</label>
+			                    </div>
+			                </div>
+				      	</div>
+				    </div>
+				</div>				
+	        </div>
+	        <div uib-accordion-group class="panel-default mb-2">
+	            <uib-accordion-heading>用户限制 </uib-accordion-heading>
+	            <div class="form-row">
+	            	<div class="form-group col-6">
+				      	<label> 非法内容限制</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">是</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">否</label>
+			                    </div>
+			                </div>			                
+				      	</div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 营销内容审核</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">人工审核</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">系统审核</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">不审核</label>
+			                    </div>
+			                </div>	
+				      	</div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 验证码攻击限制</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">是</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">否</label>
+			                    </div>
+			                </div>			                
+				      	</div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 行业群发限制</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">是</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">否</label>
+			                    </div>
+			                </div>			                
+				      	</div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 客户身份确认</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">是</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">否</label>
+			                    </div>
+			                </div>			                
+				      	</div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 营销起发条数</label>
+				      	<input class="form-control" type="number" />
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 营销起发时间</label>
+				      	<input class="form-control" type="text" />
+				      	<div class="valid-feedback">（格式-如：0830） </div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 营销终止时间</label>
+				      	<input class="form-control" type="text" />
+				      	<div class="valid-feedback">（格式-如：2130） </div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 行业发送速度</label>
+				      	<input class="form-control" type="number" />
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 行业频控数量</label>
+				      	<input class="form-control" type="number" />
+				    </div>
+				     <div class="form-group col-6">
+				      	<label> 行业频控周期</label>
+				      	<input class="form-control" type="text" />
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 营销发送速度</label>
+				      	<input class="form-control" type="number" />
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 营销频控数量</label>
+				      	<input class="form-control" type="number" />
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 营销频控周期</label>
+				      	<input class="form-control" type="text" />
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 下单确认</label>
+				      	<input class="form-control" type="text" />
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 行业要求回执率</label>
+				      	<input class="form-control" type="text" />
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> 营销要求回执率</label>
+				      	<input class="form-control" type="text" />
+				    </div>
+	            </div>
+           </div>
+           <div uib-accordion-group class="panel-default mb-2">
+	            <uib-accordion-heading>销售属性 </uib-accordion-heading>
+	            <div class="form-row">
+	            	<div class="form-group col-6">
+				      	<label> <em class="text-danger"></em> 客户来源</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">代理商</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">直营</label>
+			                    </div>
+			                </div>			                
+				      	</div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> <em class="text-danger"></em> 售价区间</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">高</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">中</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">低</label>
+			                    </div>
+			                </div>
+				      	</div>
+				    </div>
+				    <div class="form-group col-12">
+				      	<label> <em class="text-danger"></em> 客户类型</label>
+				      	<div class="mt-2">
+				      		<div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">大客</label>
+			                    </div>
+			                </div>
+			                <div class="pretty p-icon p-round">
+			                    <input type="radio" value="" id=""/>
+			                    <div class="state p-success">
+			                        <i class="icon fa fa-check"></i>
+			                        <label for="">散客</label>
+			                    </div>
+			                </div>			                
+				      	</div>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> <em class="text-danger"></em> 预估月发送量</label>
+				      	<input type="number" class="form-control"/>
+				    </div>
+				    <div class="form-group col-6">
+				      	<label> <em class="text-danger"></em> 预估投诉率</label>
+				      	<input type="text" class="form-control"/>
+				    </div>
+	            </div>
+           </div>
+   		</uib-accordion>
+	</div>
+    <div class="modal-footer justify-content-center">
+        <button class="btn btn-sm btn-ensure" type="submit">保存</button>
+        <!--<button class="btn btn-sm btn-light btn-light-border" type="button" ng-click="cancel()">取消</button>-->
+    </div>
+</form>

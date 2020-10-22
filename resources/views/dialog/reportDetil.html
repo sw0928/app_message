@@ -1,0 +1,76 @@
+<div class="modal-demo">
+	<div class="modal-header justify-content-between">
+		<h3 class="modal-title" id="modal-title">账单信息</h3>
+		<button type="button" class="btn btn-outline-close" ng-click="cancel()"><i class="fa fa-remove"></i></button>
+	</div>
+	<div class="modal-body" id="modal-body">
+		<div class="order-browse">
+			<div class="card getSendTong">
+				<div class="card-body order-body bg-fb" style="padding: 15px 40px;">
+					<div class="user-list" id="printBill">
+						<div class="table-responsive">
+							<table class="table table-list table-hover edtitable">
+								<tbody>
+									<tr>
+										<th>提交总量</th>
+										<th>发送成功量</th>
+										<th>发送成功占比</th>
+										<th>回执总量</th>
+										<th>回执成功总量</th>
+										<th>回执成功占比</th>
+										<th>回执失败总量</th>
+										<th>回执未知总量</th>
+									</tr>
+									<tr ng-repeat="dataitem in tablelistdata">
+										<td>{{dataitem.mtAmount}}</td>
+										<td>
+											{{dataitem.mtSend}}
+										</td>
+										<td>
+											{{dataitem.sentPct}}
+										</td>
+										<td>
+											{{dataitem.receiptCnt}}
+										</td>
+										<td>{{dataitem.mtReceiptSuccess}}</td>
+										<td>{{dataitem.recvPct}}</td>
+										<td>{{dataitem.mtReceiptFail}}</td>
+										<td>{{dataitem.mtReceiptUnknow}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="p-1" style="width: 100%">
+						<div id="send_tong" style="height:500px; margin: 0 auto;"></div>
+					</div>
+					<table class="table table-list table-hover edtitable" id="fail">
+						<tbody>
+							<tr ng-if="tablelistdata[0].failTrans.length != 0">
+								<th>错误原因</th>
+								<th>错误代码</th>
+								<th>汇总</th>
+							</tr>
+							<tr ng-repeat="dataitem in tablelistdata[0].failTrans">
+								<td>{{dataitem.errorReason}}</td>
+								<td>
+									{{dataitem.errorCode}}
+								</td>
+								<td>
+									{{dataitem.totalNum}}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="p-1" style="width: 100%" ng-if="tablelistdata[0].failTrans.length != 0">
+						<div id="send_fail" style="height:500px; margin: 0 auto;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer justify-content-center">
+		<button class="btn btn-sm btn-ensure" type="button" ng-click="ensure()">打印</button>
+		<button class="btn btn-sm btn-light btn-light-border" type="button" ng-click="cancel()">关闭</button>
+	</div>
+</div>

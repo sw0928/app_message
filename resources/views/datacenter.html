@@ -1,0 +1,304 @@
+<div class="row data-center">
+    <div class="col-7" style="padding-right: 0px;">
+        <div class="trans-volume">
+            <h5 class="cont-tit">发送量</h5>
+            <div class="volume-cont cont-style" style="padding-bottom: 0px;">
+                <div class="row chart-btns">
+                    <div class="col-9">
+                        <div class="btn-group" uib-dropdown>
+                            <button id="split-button" type="button" class="btn-chart" ng-click="">近七天数据</button>
+                            <!-- <button type="button" class="border-left-0 btn-chart" uib-dropdown-toggle>                                                    
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu menu-list" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                                <li role="dropdown-item">其他操作</li>
+                            </ul> -->
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <select class="form-control form-control-sm" ng-model="sendLine.ordertype" ng-change="getSendAmount()">
+                                    <option value="">订单类型</option>
+                                    <option value="2">营销</option>
+                                    <option value="1">行业</option>
+                                </select>
+                            </div>
+                            <!--<div class="col-5">
+                                <select class="form-control form-control-sm" ng-model="sendLine.sendtype" ng-change="getSendAmount()">
+                                    <option value="">发送类型</option>
+                                    <option value="0">立即发送</option>
+                                    <option value="1">定时发送</option>
+                                </select>
+                            </div>-->
+                        </div>
+                        <!-- <div class="btn-group" uib-dropdown>
+                            <button id="split-button" type="button" class="border-right-0 btn-chart" ng-click="">订单类型</button>
+                            <button type="button" class="border-left-0 btn-chart" uib-dropdown-toggle>                                                    
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu menu-list" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                                <li role="dropdown-item">其他操作</li>
+                            </ul>
+                        </div>
+                        <div class="btn-group ml-3" uib-dropdown>
+                            <button id="split-button" type="button" class="border-right-0 btn-chart" ng-click="">发送类型</button>
+                            <button type="button" class="border-left-0 btn-chart" uib-dropdown-toggle>                                                    
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu menu-list" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                                <li role="dropdown-item">其他操作</li>
+                            </ul>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="mb-2 chart-tit">
+                    <b>{{sendLine.amount}}</b> 总发送条数
+                </div>
+                <div ng-init="getSendAmount()" class="p-1" style="width: 100%">
+                	<div id="send-amount" style="width: 100%;height:438px;"></div>
+                </div>                                    
+            </div>
+        </div>
+        <div class="new-customer" ng-if="SysPermission.showKehu()">
+            <h5 class="cont-tit">新增客户</h5>
+            <div></div>
+            <div class="newCust-cont cont-style" style="padding-bottom: 0px;">
+                <div class="row chart-btns">
+                    <div class="col-5">
+                        <div class="btn-group" uib-dropdown>
+                            <button id="split-button" type="button" class="btn-chart" ng-click="">近七天数据</button>
+                            <!-- <button type="button" class="border-left-0 btn-chart" uib-dropdown-toggle>                                                    
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu menu-list" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                                <li role="dropdown-item">其他操作</li>
+                            </ul> -->
+                        </div>
+                    </div>
+                    <!-- <div class="col-7 text-right">
+                        <div class="btn-group" uib-dropdown>
+                            <button id="split-button" type="button" class="border-right-0 btn-chart" ng-click="">单价</button>
+                            <button type="button" class="border-left-0 btn-chart" uib-dropdown-toggle>                                                    
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu menu-list" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                                <li role="dropdown-item">其他操作</li>
+                            </ul>
+                        </div>
+                        <div class="btn-group ml-3" uib-dropdown>
+                            <button id="split-button" type="button" class="border-right-0 btn-chart" ng-click="">发送类型</button>
+                            <button type="button" class="border-left-0 btn-chart" uib-dropdown-toggle>                                                    
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu menu-list" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                                <li role="dropdown-item">其他操作</li>
+                            </ul>
+                        </div>
+                    </div> -->
+                </div>
+                <div class=" chart-tit">
+                    <b>{{customer.amount}}</b> 新增客户数
+                </div>
+                <div ng-init="getNewAddCust()" class="p-1">
+                	<div id="new-customer" style="width: 100%;height:228px;"></div>
+                </div>  
+            </div>
+        </div>
+        <div class="new-customer" ng-if="SysPermission.showOrderThree()">
+            <h5 class="cont-tit">订单信息</h5>
+            <div style="height: 1px;"></div>
+            <div class="newCust-cont cont-style chart-btns" style="padding-bottom: 0px;">
+            	<button id="split-button" style="margin-bottom: 10px;" type="button" class="btn-chart" ng-click="">最近订单发送情况</button>
+            	<div class="table-responsive">
+					  		<table class="table table-list table-hover">
+								<thead>
+								    <tr>
+								      	<th scope="col">提交时间</th>				 
+								      	<th scope="col">状态成功</th>
+								      	<th scope="col">状态失败</th>
+								      	<th scope="col">状态未知</th>
+								    </tr>
+								</thead>
+								<tbody  ng-if="tablelistdata.data.length == 0">
+									<tr><td colspan="4">暂无数据</td></tr>
+								</tbody>
+								<tbody ng-if="tablelistdata.data.length > 0" ng-repeat="dataitem in tablelistdata.data">									
+								    <tr  class="border-bottom-0" >					   
+									    <td class="text-nowrap">{{dataitem.submitTime | limitTo:19 }}</td>				    				  
+									    <td>{{dataitem.mtReceiptSuccess}}</td>
+									    <td>{{dataitem.receiptFailed}}</td>
+									    <td>{{dataitem.mtUnknow}}</td>
+								    </tr>
+								    <tr class="tr-info">
+								    	<td colspan="4">
+								    		<div style="width: 400px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">
+								    			“{{dataitem.smsText}}”
+								    		</div>
+								    		</td>
+									</tr>			
+								</tbody>
+								</table>
+					  	</div>
+            </div>
+      
+        </div>
+      
+    </div>
+    <div class="col-5">
+        <div class="remind-center">  
+        		<h5 class="cont-tit">账户信息</h5>
+        		<div class="remind-cont">
+                <div class="card bg-gray credit-wrapper">
+                    <div class="card-header">
+                        <div class="row credit-tit">
+                            <div class="col-4 text-center">
+                                <div class="top">账户余额</div>
+                                <div class="bottom" uib-popover="{{showCreditdata?userdata.userAccount.balance+'元':'****'}}" popover-trigger="'mouseenter'">
+                                    <span  style="max-width: 100%;overflow: hidden;">{{showCreditdata?userdata.userAccount.balance:'****'}}</span>
+                                </div>
+                            </div>
+                            <!--class="text-truncate"单行显示 -->
+                            <div class="col-4 text-center">
+                                <div class="top">信用额度</div>
+                                <div class="bottom" uib-popover="{{showCreditdata?userdata.userAccount.credit:'****'}}" popover-trigger="'mouseenter'">
+                                    <span  style="max-width: 100%;overflow: hidden;">{{showCreditdata?userdata.userAccount.credit:'****'}}</span>
+                                </div>
+                            </div>
+                            <div class="col-4 clearfix">
+                                <span class="left float-left" ng-click="showCreditdata = !showCreditdata"><i ng-class="showCreditdata?'fa fa-eye':'eye-close-icon'"></i></span>
+                                <span class="right float-right"><i class="fa fa-id-card-o"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pt-3 pb-2">
+                        <div class="d-flex credit-list" style="min-height: 66px;">
+                            <div class="d-flex flex-wrap credit-cont mb-2" ng-class="showPricing?'':'open'" ng-if="userdata.userPrice.length > 4">
+                                <div class="cont-item text-center border-right" ng-repeat="price in userdata.userPrice">
+                                    <div class="top">{{price.sendType}}-{{price.templateType}}</div>
+                                    <div class="bottom">{{showCreditdata?price.unitPrice+'元':'****'}}</div>
+                                </div>
+                            </div>
+                            <div style="width: 100%;" class="d-flex flex-wrap credit-cont mb-2" ng-class="showPricing?'':'open'" ng-if="userdata.userPrice.length == 4">
+                                <div style="width: 25%;" class="cont-item text-center border-right" ng-repeat="price in userdata.userPrice">
+                                    <div class="top">{{price.sendType}}-{{price.templateType}}</div>
+                                    <div class="bottom">{{showCreditdata?price.unitPrice+'元':'****'}}</div>
+                                </div>
+                            </div>
+                            <div style="width: 100%;" class="d-flex flex-wrap credit-cont mb-2" ng-class="showPricing?'':'open'" ng-if="userdata.userPrice.length == 3">
+                                <div style="width: 33%;" class="cont-item text-center border-right" ng-repeat="price in userdata.userPrice">
+                                    <div class="top">{{price.sendType}}-{{price.templateType}}</div>
+                                    <div class="bottom">{{showCreditdata?price.unitPrice+'元':'****'}}</div>
+                                </div>
+                            </div> 
+                            <div style="width: 100%;" class="d-flex flex-wrap credit-cont mb-2" ng-class="showPricing?'':'open'" ng-if="userdata.userPrice.length == 2">
+                                <div style="width: 50%;" class="cont-item text-center border-right" ng-repeat="price in userdata.userPrice">
+                                    <div class="top">{{price.sendType}}-{{price.templateType}}</div>
+                                    <div class="bottom">{{showCreditdata?price.unitPrice+'元':'****'}}</div>
+                                </div>
+                            </div>
+                            <div style="width: 100%;" class="d-flex flex-wrap credit-cont mb-2" ng-class="showPricing?'':'open'" ng-if="userdata.userPrice.length == 1">
+                                <div style="width: 100%;" class="cont-item text-center border-right" ng-repeat="price in userdata.userPrice">
+                                    <div class="top">{{price.sendType}}-{{price.templateType}}</div>
+                                    <div class="bottom">{{showCreditdata?price.unitPrice+'元':'****'}}</div>
+                                </div>
+                            </div>
+                            <div class="credit-cont" ng-show="userdata.userPrice.length > 4">                        	
+                                <div class="cont-item text-center down-icon" ng-click="showPricing=!showPricing">
+                                    <i class="fa fa-chevron-circle-down"></i>                            	
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>                                        
+                </div>
+            </div>
+        		<h5 class="cont-tit">ISP 发送情况</h5>
+            <div class="ISP-cont mb-3">
+                <div class="btn-conts">
+                    <div class="btn-group" uib-dropdown>
+                        <button id="split-button" type="button" class="btn-chart" ng-click="">本月数据</button>
+                        <!-- <button type="button" class="border-left-0 btn-chart" uib-dropdown-toggle>                                                    
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu menu-list" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                            <li role="dropdown-item">其他操作</li>
+                        </ul> -->
+                    </div>
+                </div>
+                <div class="row ISP-tit" style="margin: 0 -10px;">                                        
+                    <div class="col-3 text-center border-right" style="padding: 0px;">
+                        <div class="top">合计</div>
+                        <div class="bottom">
+                        	<span style="background: #f40000;"></span> <br />
+                        	{{ispSendcount.TOTAL}}
+                        </div>
+                    </div>
+                    <div class="col-3 text-center border-right" style="padding: 0px;">
+                        <div class="top">中国移动</div>
+                        <div class="bottom"> 
+                        	<span class="color1"></span><br />
+                        	{{ispSendcount.YDCOUNT}}
+                        </div>
+                    </div>
+                    <div class="col-3 text-center border-right" style="padding: 0px;">
+                        <div class="top">中国电信</div>
+                        <div class="bottom"> 
+                        	<span class="color3"></span> <br />
+                        	{{ispSendcount.DXCOUNT}}
+                        </div>
+                    </div>
+                    <div class="col-3 text-center border-right" style="padding: 0px;">
+                        <div class="top">中国联通</div>
+                        <div class="bottom"> 
+                        	<span class="color2"></span><br />
+                        	{{ispSendcount.LTCOUNT}}
+                        </div>
+                    </div>                                       
+                </div>
+                <div ng-init="getISPdata()" class="p-1">
+                	<div id="ISP-circle" style="width: 100%;height: 195px;"></div>
+                </div>
+            </div>
+          
+            <h5 class="cont-tit">提醒中心</h5>
+            <div class="remind-cont">
+                <div class="card bg-gray">
+                    <div class="card-header">
+                    		<a class="" style="font-size: 18px;color: #000;" href="">待办事项</a>
+                        <!--<a class="remind-tit active" href="">待办事项</a>-->
+                        <!--<a class="remind-tit" href="">消息通知</a>-->
+                    </div>
+                    <div class="card-body pt-3 pb-1">
+                        <div class="row remind-head">
+                            <div class="col-6"><span class="number">{{remindList.totalCount}}</span>条待处理</div>
+                            <div class="col-6 text-right remind-btn-list">
+                                <div class="btn-group" uib-dropdown>
+                                	  <!--<button id="split-button" type="button" class="btn-remind" ng-click="">授信审批</button>-->
+                                    <!--<button id="split-button" type="button" class="border-right-0 btn-remind" ng-click="">授信审批</button>-->
+                                    <!--<button type="button" class="border-left-0 btn-remind" uib-dropdown-toggle>                                                    
+                                        <span class="sr-only">Split button!</span>
+                                    </button>-->
+                                    <!--<ul class="dropdown-menu menu-list menu-list-right" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                                        <li role="dropdown-item">其他操作</li>
+                                    </ul>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="remind-list list-group list-group-flush">
+                    	<li class="list-group-item" ng-if="remindList.data.length == 0">
+                    		<span>暂无信息</span>
+                      </li>
+                        <li class="list-group-item" ng-if="remindList.data.length > 0" ng-repeat="dataitem in remindList.data">
+                          <span><b>{{dataitem.remindType}}</b></span> 
+                          <span>{{dataitem.msgContent}}</span>
+                         <!-- <span><b>{{dataitem.createTime}}</b></span>-->
+                          <a href="" ng-click="remindDetil(dataitem)"><i class="fa fa-search"></i></a>
+                        </li>                       
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

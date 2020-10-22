@@ -1,0 +1,89 @@
+<div class="modal-demo">   
+    <div class="modal-header justify-content-between">
+        <h3 class="modal-title" id="modal-title">导入用户</h3>        
+    	<button type="button" class="btn btn-outline-close" ng-click="cancel()"><i class="fa fa-remove"></i></button>
+    </div>
+    <div class="modal-body" id="modal-body">
+    	<form class="table-form p-2 pb-1 bg-fb mb-2 border d-flex" ng-submit="searchtable()">
+    		<div class="form-group mr-1">
+			    <label for="userName">用户名</label>
+			    <input type="text" class="form-control" ng-model="searchdata.userName" id="userName">
+			</div>
+    		<div class="form-group mr-1">
+			    <label for="loginName">登录名</label>
+			    <input type="text" class="form-control" ng-model="searchdata.loginName" id="loginName">
+			</div>
+			<div class="form-group mr-1">
+			    <label for="phoneNumber">号码</label>
+			    <input type="text" class="form-control" ng-model="searchdata.phoneNumber" id="phoneNumber">
+			</div>
+			<div class="form-group align-self-end">
+		      	<button type="submit" class="btn btn-sm ensure mr-1">查询</button>
+		      	<button type="button" class="btn btn-sm ensure mr-1">确定导入</button>
+				<button type="button" class="btn btn-sm cancel mr-1" ng-click="">重置</button>
+				<button type="button" class="btn btn-sm cancel" ng-click="cancel()">关闭</button>
+		    </div>
+    	</form>
+    	<div class="order-browse">
+		    <div class="card">
+		        <div class="card-header clearfix">                                
+		            <ul class="order-list-type d-flex float-left">
+		                <li class="list-item active"><a href>用户列表</a></li>
+		            </ul>
+		        </div>
+		        <div class="card-body order-body bg-fb">
+					<div class="user-list">
+					  	<div class="table-responsive">
+					  		<table class="table table-list table-hover">
+								<thead>
+								    <tr>
+								      	<th scope="col">
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="Allchecked" ng-click="allSelect($event,tablelistdata.data)">
+												<label class="custom-control-label" for="Allchecked">全选</label>
+											</div>
+										</th>
+								      	<th scope="col">号码</th>
+								      	<th scope="col">用户名</th>
+								      	<th scope="col">登录名</th>
+								      	<th scope="col">联系人</th>
+								    </tr>
+								</thead>
+								<tbody>
+									<tr ng-if="tablelistdata.data.length > 0"><td colspan="5"></td></tr>
+								    <tr ng-if="tablelistdata.data.length > 0" ng-repeat="user in tablelistdata.data">
+									    <td>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" ng-model="user.selected" class="custom-control-input" id="checked{{$index}}" ng-change="listItemSelect()">
+												<label class="custom-control-label" for="checked{{$index}}"></label>
+											</div>
+										</td>
+									    <td>{{user.mobilePhone}}</td>				    
+									    <td>{{user.userName}}</td>
+									    <td>{{user.loginName}}</td>
+									    <td>{{user.department}}</td>
+									</tr>
+								</tbody>
+							</table>
+					  	</div>
+					</div>
+					<div class="common-page mt-2 p-2 d-flex justify-content-center">
+				  		<ul class="pagination-sm mr-2" uib-pagination total-items="total" boundary-link-numbers="true" rotate="true" items-per-page="searchdata.pageSize" ng-model="searchdata.currentPage" max-size="8" boundary-links="true" num-pages="numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="getTableList()"></ul> 
+				  		<form class="btn-page-cont" ng-submit="getTableList()">
+				  			<select class="btn-page-sel mr-2" ng-model="searchdata.pageSize" ng-change="searchtable()">
+				  				<option value="10">10条/页</option>
+				  				<option value="20">20条/页</option>
+				  				<option value="30">30条/页</option>
+				  			</select>
+				  			跳至  <input class="btn-page-input ml-2" type="number" ng-model="searchdata.currentPage" max="{{numPages}}" /> 页
+						</form>
+				  	</div>
+		        </div>
+		    </div>
+		</div>    	
+    </div>
+    <!--<div class="modal-footer align-items-center">
+        <button class="btn btn-sm btn-ensure" type="button" ng-click="ensure()">确定</button>
+        <button class="btn btn-sm btn-light btn-light-border" type="button" ng-click="cancel()">取消</button>
+    </div>  -->  
+</div>

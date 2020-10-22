@@ -1,0 +1,187 @@
+<div class="order-browse">
+    <div class="card">
+        <div class="card-header clearfix">                                
+            <ul class="order-list-type d-flex float-left">
+                <li class="list-item active"><a href>人员列表</a></li>
+            </ul>
+            <div class="order-head-btn float-right d-flex">
+            	<div class="num-text">
+            		<b>{{searchdata.total}}</b> 条记录
+            	</div>
+            	<div class="btn-cont">
+            		<button type="button" class="btn btn-outline-info btn-sm" ng-if="SysPermission.accountType != 2" ng-click="addUser()"> <i class="fa fa-plus"></i> 新增人员</button>
+					<button type="button" ng-if="SysPermission.showExport()" class="btn btn-outline-info btn-sm" ng-click="importUserBalance()"> <i class="fa fa-cloud-download"></i> 导出用户余额</button>
+            	</div>
+            </div>
+        </div>
+        <div class="card-body order-body bg-fb pb-30">
+			<div class="user-list">
+				<form class="table-form" ng-submit="searchTable()">
+				  	<div class="d-flex">
+					    <div class="form-group mr-1">
+						    <label for="loginname">登录名</label>
+						    <input type="text" ng-model="searchdata.loginName" placeholder="请输入" class="form-control no-control" id="loginname">
+					    </div>
+					    <div class="form-group mr-1">
+						    <label for="accounttype">账户类型</label>
+						    <select id="accounttype" ng-model="searchdata.userType" class="form-control no-control">
+												<!--<option value="">请选择</option>-->
+												<option value="0">全部</option>
+												<option value="{{dataitem.id}}" ng-repeat="dataitem in userTypeObj">{{dataitem.userName}}</option>
+				                <!--<option value="8">客户</option>
+				                <option value="7">代理商</option>
+				                <option value="100">直营客户</option>
+				                <option value="6">客户经理</option>
+				                <option value="5">销售经理</option>
+				                <option value="4">销售总监</option>
+				                <option value="2">财务</option>
+				                <option value="3">运营</option>-->
+						    </select>
+					    </div>
+					    <div class="form-group mr-1">
+						    <label for="sendtype">可发类型</label>
+						    <select id="sendtype" ng-model="searchdata.sendType" class="form-control no-control">
+													<!--<option value="">请选择</option>-->
+			                    <option value="0">全部</option>
+			                    <option value="2">行业</option>
+			                    <option value="4">营销</option>
+			                    <option value="6">行业与营销</option>
+						    </select>
+					    </div>
+					    <div class="form-group mr-1">
+						    <label for="accountstatus">账户状态</label>
+						    <select id="accountstatus" ng-model="searchdata.userStatus" class="form-control no-control">
+				                <option value="-1">全部</option>
+				                <option value="0">可用</option>
+				                <option value="1">不可用</option>
+						    </select>
+					    </div>
+					    <div class="form-group mr-1">
+						    <label for="accountPlant">接入方式</label>
+						    <select id="accountPlant" ng-model="searchdata.accountPlant" class="form-control no-control">
+				                <option value="">全部</option>
+				                <option value="0">页面账号</option>
+												<option value="1">HTTP</option>
+											  <option value="2">CMPP</option>
+											  <option value="3">ST-HTPP</option>
+						    </select>
+					    </div>
+					    <div class="form-group align-self-end">
+					      	<button type="submit" class="btn btn-sm ensure mr-1">查询</button>
+							<button type="button" class="btn btn-sm cancel" ng-click="resetForm()">重置</button>
+					    </div>
+					</div>
+			  	</form>
+			  	<div class=""> <!-- table-responsive -->
+			  		<table class="table table-list table-hover">
+						<thead>
+						    <tr>
+						      	<th scope="col">登录名</th>
+						      	<th scope="col">用户名</th>
+						      	<th scope="col">联系人</th>
+						      	<th scope="col">账户状态</th>
+						      	<th scope="col">账户类型</th>
+						      	<th scope="col">接入方式</th>
+						      	<th scope="col" style="min-width: 90px;">可发类型</th>
+						      	<th scope="col">创建人</th>
+						      	<th scope="col">账户余额</th>
+						      	<th scope="col">信用额度</th>
+						      	<th scope="col">可用余额</th>
+						      	<th scope="col">操作</th>
+						    </tr>
+						</thead>
+						<tbody>
+							<tr> <td colspan="12" ng-if="userlistdata.data.length == null">暂无数据</td> </tr>
+						    <tr ng-if="userlistdata.data.length != null" ng-repeat="dataitem in userlistdata.data">
+							    <td>{{dataitem.loginName}}</td>
+							    <td>{{dataitem.userName}}</td>				    
+							    <td>{{dataitem.department}}</td>
+							    <td>
+							    	<span ng-class="dataitem.accountStatus == 0?'available':'disabled'" class="table-icon "></span>
+							    	{{dataitem.accountStatus == 0?'可用':'不可用'}}
+							    </td>
+							    <td>
+							    	<span ng-if="dataitem.accountType == 8">客户</span>
+							    	<span ng-if="dataitem.accountType == 7">代理商</span>
+							    	<span ng-if="dataitem.accountType == 100">直营客户</span>
+							    	<span ng-if="dataitem.accountType == 6">客户经理</span>
+							    	<span ng-if="dataitem.accountType == 5">销售经理</span>
+							    	<span ng-if="dataitem.accountType == 4">销售总监</span>
+							    	<span ng-if="dataitem.accountType == 2">财务</span>
+							    	<span ng-if="dataitem.accountType == 3">运营</span>
+							    	<span ng-if="dataitem.accountType == 110">通道管理员</span>
+							    	<!--<span ng-if="dataitem.accountType == 0">全部</span>-->
+							    </td>
+							    <td>
+							    	<span ng-if="dataitem.accountPlant == 0">页面账号</span>
+							    	<span ng-if="dataitem.accountPlant == 1">HTTP</span>
+							    	<span ng-if="dataitem.accountPlant == 2">CMPP</span>
+							    	<span ng-if="dataitem.accountPlant == 3">ST-HTPP</span>
+							    </td>
+							    <td>
+							    	<span ng-if="dataitem.templateTypeBitwise == 2">行业</span>
+							    	<span ng-if="dataitem.templateTypeBitwise == 4">营销</span>
+							    	<span ng-if="dataitem.templateTypeBitwise == 6">行业与营销</span>
+							    	<!--<span ng-if="dataitem.templateTypeBitwise == 0">全部</span>-->
+							    </td>
+							    <td>{{dataitem.createrName}}</td>
+							    <td>{{dataitem.balance}}</td>
+							    <td>{{dataitem.credit}}</td>							   
+							    <td>{{usable(dataitem.balance + dataitem.credit)}}</td>
+							    <td class="text-nowrap">
+							    	<button type="button" ng-if="SysPermission.canPricing()" class="btn btn-link btn-sm p-0" ng-click="fixedPrice(dataitem)">定价</button>
+							    	<button type="button" ng-if="SysPermission.canTransfer()" class="btn btn-link btn-sm p-0" ng-click="transferAccounts(dataitem)">转账</button>
+							    	<button type="button" ng-if="SysPermission.canModify()" class="btn btn-link btn-sm p-0" ng-click="modifyUser(dataitem)">修改</button>
+							    	<div class="btn-group" ng-if="SysPermission.accountType != 2" uib-dropdown>
+			                            <button type="button" class="btn btn-link btn-sm btn-color" style="padding: 0px;" uib-dropdown-toggle>更多</button>
+			                            <ul class="dropdown-menu menu-list" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+			                                <li role="dropdown-item" ng-if="SysPermission.canAlarm()" ng-click="sumwarning(dataitem)">余额告警</li>
+			                                <li role="dropdown-item" ng-if="SysPermission.canResetPwd()" ng-click="resetpassword(dataitem)">重置密码</li>
+			                                <li role="dropdown-item" ng-if="SysPermission.canSubClients()" ng-click="subclientSearch(dataitem)">子客户</li>
+			                                <li role="dropdown-item" ng-if="SysPermission.canDayPerf()" ng-click="dayachievement(dataitem)">每天业绩</li>
+			                                <li role="dropdown-item" ng-if="SysPermission.canPersonPerf()" ng-click="personachievement(dataitem)">每人业绩</li>
+			                                <!-- <li role="dropdown-item" ng-if="SysPermission.canCustSpec()" ng-click="clientspec(dataitem)">客户规格</li> -->
+			                            </ul>
+			                        </div>
+							    </td>				    
+						    </tr>
+						</tbody>
+					</table>
+						<div id="loading-container" ng-show="showloading == 0">
+							<div class="spinner">
+								<div class="spinner-container container1">
+								  <div class="circle1"></div>
+								  <div class="circle2"></div>
+								  <div class="circle3"></div>
+								  <div class="circle4"></div>
+								</div>
+								<div class="spinner-container container2">
+								  <div class="circle1"></div>
+								  <div class="circle2"></div>
+								  <div class="circle3"></div>
+								  <div class="circle4"></div>
+								</div>
+								<div class="spinner-container container3">
+								  <div class="circle1"></div>
+								  <div class="circle2"></div>
+								  <div class="circle3"></div>
+								  <div class="circle4"></div>
+								</div>
+							</div>
+						</div>
+			  	</div>
+			  	<div class="common-page mt-2 p-2 d-flex justify-content-center">
+			  		<ul class="pagination-sm mr-2" uib-pagination total-items="searchdata.total" boundary-link-numbers="true" rotate="true" items-per-page="searchdata.pageSize" ng-model="searchdata.currentPage" max-size="8" boundary-links="true" num-pages="numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="getUserlist()"></ul> 
+			  		<from class="btn-page-cont" ng-submit="searchTable()">
+			  			<select class="btn-page-sel mr-2" ng-model="searchdata.pageSize" ng-change="searchTable()">
+			  				<option value="10">10条/页</option>
+			  				<option value="20">20条/页</option>
+			  				<option value="30">30条/页</option>
+			  			</select>
+			  			跳至  <input class="btn-page-input ml-2" ng-model="searchdata.currentPage" max="{{numPages}}" type="number" ng-change="getUserlist()"/> 页
+			  		</form>
+			  	</div>
+			</div>
+        </div>
+    </div>
+</div>

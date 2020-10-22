@@ -1,0 +1,65 @@
+<div class="modal-header justify-content-between">
+    <h3 class="modal-title" id="modal-title">子用户查询</h3>
+    <button type="button" class="btn btn-outline-close" ng-click="cancel()"><i class="fa fa-remove"></i></button>
+</div>
+<form class="bg-fb" ng-submit="getDatalist()">
+    <div class="modal-body" id="modal-body">
+        <div class="form-row">
+		    <div class="form-group">
+		      	<label>登录名</label>
+		      	<input type="text" ng-model="loginName" disabled class="form-control form-control-sm">
+		    </div>		   
+		</div>
+	    <div class="table-list pt-2 pb-2">
+	    	<h6 class="alert alert-info pl-1"><i class="fa fa-list-alt"></i> 子客户列表</h6>
+	    	<div class="table-responsive">
+	    		<table class="table">
+					<thead>
+					    <tr>
+					      <th scope="col">登录名</th>
+					      <th scope="col">用户名</th>
+					      <th scope="col">账户状态</th>
+					      <th scope="col">账户类型</th>
+					      <th scope="col">账户余额</th>
+					      <th scope="col">信用额度</th>
+					      <th scope="col">省份</th>
+					      <th scope="col">地市</th>
+					      <th scope="col">公司</th>
+					      <th scope="col">最后登录时间</th>
+					      <th scope="col">创建人</th>
+					      <th scope="col">创建时间</th>					      
+					    </tr>
+			 		</thead>
+					<tbody>
+						<tr ng-if="tablelist.data.length == 0"><td colspan="12">没有找到匹配的记录</td></tr>
+					    <tr ng-if="tablelist.data.length > 0" ng-repeat="dataitem in tablelist.data">
+					      <td scope="row">{{dataitem.loginName}}</td>
+					      <td>{{dataitem.userName}}</td>
+					      <td><span class="badge badge-pill" ng-class="dataitem.accountStatus == 0?'badge-success':'badge-warning'">{{dataitem.accountStatus == 0?'可用':'不可用'}}</span></td>
+					      <td>{{dealAccountType(dataitem.accountType)}}</td>
+					      <td>{{dataitem.balance}}</td>
+					      <td>{{dataitem.credit}}</td>
+					      <td>{{dataitem.province}}</td>
+					      <td>{{dataitem.city}}</td>
+					      <td>{{dataitem.company}}</td>
+					      <td>{{dataitem.lastLoginTime | limitTo:19 }}</td>
+					      <td>{{dataitem.createrName}}</td>
+					      <td>{{dataitem.createTime | limitTo:19 }}</td>
+					    </tr>
+				  	</tbody>
+				</table>
+	    	</div>	    	
+		</div>
+		<div class="common-page mt-2 p-2 d-flex justify-content-center">
+			<ul class="pagination-sm mr-2" uib-pagination total-items="searchdata.total" boundary-link-numbers="true" rotate="true" items-per-page="searchdata.pageSize" ng-model="searchdata.currentPage" max-size="8" boundary-links="true" num-pages="numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="getDatalist()"></ul> 
+			<div class="btn-page-cont">
+				<select class="btn-page-sel mr-2" ng-model="searchdata.pageSize" ng-change="searchTable()">
+					<option value="10">10条/页</option>
+					<option value="20">20条/页</option>
+					<option value="30">30条/页</option>
+				</select>
+				跳至  <input ng-model="searchdata.currentPage" class="btn-page-input ml-2" type="number"/> 页
+			</div>
+		</div>
+    </div>
+</form>

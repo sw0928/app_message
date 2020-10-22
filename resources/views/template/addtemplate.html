@@ -1,0 +1,77 @@
+<div class="modal-header justify-content-between">
+    <h3 class="modal-title" id="modal-title">申请模板</h3>
+    <button type="button" class="btn btn-outline-close" ng-click="cancel()"><i class="fa fa-remove"></i></button>
+</div>
+<form class="bg-fb" ng-submit="ensure()">
+	<div class="modal-content">
+	    <div class="modal-body" id="modal-body">
+	    	<div class="form-row">
+	    		<div class="text-danger mb-2">
+	    			* 需要更改的地方请先选中，后点击下发的A按钮选择红色； 需要取消标记的地方请先选中，后点击删除文字格式按钮    			
+	    		</div>
+			    <div class="form-group col-md-12">
+			      	<label><span class="text-danger">*</span> 模板内容</label>
+					<textarea kindeditor class="form-control" ng-model="basedata.templateSms"></textarea>
+			    </div>		  
+			</div>	
+	        <div class="form-row">
+			    <div class="form-group col-md-4">
+			      	<label><span class="text-danger">*</span> 模板分类</label>
+			      	<select class="form-control" ng-model="basedata.templateType" required>
+						<option value="">请选择</option>
+			      		<option value="1">行业短信</option>
+						<option value="2">营销广告</option>
+			      	</select>
+			    </div>
+			    <div class="form-group col-md-4">
+			      	<label>申请人</label>
+			      	<input type="text" disabled ng-model="basedata.applicant" class="form-control" placeholder="请输入">
+			    </div>
+			    <!--<div class="form-group col-md-4">
+						<label for="recharger">申请人</label>
+						<select class="form-control" ng-model="basedata.applicant" ng-options="x.userId as x.loginName for x in options">
+						</select>
+					</div>-->
+			    <div class="form-group col-md-4">
+			      	<label>主机号码</label>
+			      	<input type="text" ng-disabled="basedata.hanging == 1?false:true" class="form-control" ng-model="basedata.miguMobile" placeholder="请输入">
+			    </div>
+			</div>
+			<div class="form-row">
+			    <div class="form-group col-md-6">
+			      	<label class="mr-3">挂机模板</label>
+			      	<div class="pretty p-icon p-round mr-2">
+	                    <input type="radio" name="hanging" ng-checked="basedata.hanging == 1?true:false" ng-model="basedata.hanging" value="1" id="yes"/>
+	                    <div class="state p-success">
+	                        <i class="icon fa fa-check"></i>
+	                        <label for="yes">是</label>
+	                    </div>
+	                </div>
+			      	<div class="pretty p-icon p-round mr-2">
+	                    <input type="radio" name="hanging" ng-checked="basedata.hanging == 0?true:false" ng-model="basedata.hanging" value="0" id="no"/>
+	                    <div class="state p-success">
+	                        <i class="icon fa fa-check"></i>
+	                        <label for="no">否</label>
+	                    </div>
+	                </div>
+			    </div>		   
+			</div>	
+			<div class="form-row">
+			    <div class="form-group col-md-12">
+			      	<label>备注</label>
+			      	<textarea class="form-control" ng-model="basedata.remark" rows="3"></textarea>
+			    </div>		  
+			</div>
+			<div class="text-danger mb-2">
+				* 模板内容请填写真实的发送内容，然后将要变化的部分标记成红色（不要用*#之类的符号来表示要变化的内容），如有需要特别申明的请写在备注中    			
+			</div>
+			<div class="text-danger mb-2">
+				* 一个主机号，有且只能绑定一个挂机模板    			
+			</div>      
+	    </div>
+	    <div class="modal-footer justify-content-center">
+	        <button class="btn btn-sm btn-ensure" type="submit">{{basedata.templateId?'重新申请':'确定申请'}}</button>
+	        <button class="btn btn-sm btn-light btn-light-border" type="button" ng-click="cancel()">取消</button>
+	    </div>
+	</div>
+</form>

@@ -1,0 +1,21 @@
+<div class="modal-header justify-content-between">
+    <h3 class="modal-title" id="modal-title">导入联系人文件</h3>
+    <button type="button" class="btn btn-outline-close" ng-click="cancel()"><i class="fa fa-remove"></i></button>
+</div>    
+<form ng-submit="ensure()"> 
+    <div class="modal-body" id="modal-body">
+    	<ul class="list-group list-group-flush">
+		  	<li class="p-1"><b class="text-danger">注：</b></li>
+		  	<li class="p-1">1、支持.xls及.xlsx格式,csv格式的文件导入。</li>
+		  	<li class="p-1">2、2013-10-20更新了新的导入模板，请 
+		  		<a href="../../public/file/importcontact.xls" download="importcontact.xls"> 下载新模板,</a> 
+		  		<a href="../../public/file/importcontact.csv" download="importcontact.csv">下载新CSV模板 。</a>
+		  	</li>
+		  	<li class="p-1">3、模板中“分组”、“姓名”、“手机”三个字段为必填项，其他字段可以为空。</li>
+		  	<li class="p-1">选择联系人文件:  <input type="file" ng-test-upload="multipartFile" name="multipartFile" required/></li>
+		</ul>
+   	</div>
+    <div class="modal-footer justify-content-center">
+        <button class="btn btn-sm btn-ensure" type="submit">提交</button>
+    </div>
+</form>

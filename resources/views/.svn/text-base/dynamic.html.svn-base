@@ -1,0 +1,113 @@
+
+<div class="submit-order order-browse">
+    <div class="card">
+        <div class="card-header">
+            <!--<h4 class="pt-2 pb-2">短信群发</h4>-->
+            <ul class="order-list-type d-flex float-left">
+                <li ng-if="SysPermission.showSaveOrder()" class="list-item" ui-sref-active="active"><a ui-sref="saveorder">短信群发</a></li>
+                <li ng-if="SysPermission.showDynamic()" class="list-item" ui-sref-active="active"><a ui-sref="dynamic">动态发送</a></li>
+                <li ng-if="SysPermission.showVoiceOrder()" class="list-item" ui-sref-active="active"><a ui-sref="voice">语音发送</a></li>
+            </ul>
+        </div>
+        <div style="padding: 10px 20px;color: #f40000;background: #fbfbfb;" ng-if="returnShowB">
+          {{returnTxtTwo}}               		
+        </div>
+        <div class="card-body order-body">
+            <div class="row justify-content-between">
+                <div class="col-9">
+                    <form ng-submit="saveOrder()">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label class="form-title" for="ordertype">订单类型</label>
+                                <select id="ordertype" class="form-control form-control-sm" ng-model="basedata.orderType">
+                                    <option value="">请选择</option>
+                                    <option value="{{dataitem.id}}" ng-repeat="dataitem in templateObj">{{dataitem.userName}}</option> 
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="form-title" for="sendway">发送方式</label>
+                                <select id="sendway" class="form-control form-control-sm" ng-model="basedata.sendType">
+                                    <option value="">请选择</option>
+                                    <option value="0">立即发送</option>
+                                    <option value="1">定时发送</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4" ng-show="basedata.sendType == 1">
+                                <label class="form-title" for="ordersenddate">发送时间</label>
+                                <div class="input-group input-group-sm">
+                                    <input def-laydate type="text" id="ordersenddate" min-date="{{mindate}}" datetype="datetime" ng-model="basedata.sendDate" placeholder="请选择日期" class="layui-input form-control"/>
+                                    <div class="input-group-append">
+                                      <button class="btn btn-outline-secondary" type="button"><i class="fa fa-clock-o fa-time-icon"></i></button>
+                                    </div>
+                                </div>
+                            </div>                                                                                                       
+                            <div class="form-group col-md-12 clearfix">
+                                <label class="form-title" for="content">短信内容</label>
+                                <div class="d-inline-block mr-3 f-bold">当前短信数字: <span class="text-danger">{{contentCnt}}</span></div>
+                                <div class="d-inline-block f-bold">短信条数: <span class="text-danger">{{contentSmsCnt}}</span></div>
+                                <div class="d-inline-block float-right">
+                                    <button type="button" class="btn btn-outline-secondary btn-xs" ng-click="clearContent()">清空内容</button>
+                                    <button type="button" class="btn btn-outline-primary btn-xs" ng-click="importTemplate()">导入模板</button>                                   
+                                </div>
+                                <textarea class="form-control " ng-disabled="isImportCont" ng-change="updateContentLength()" ng-model="basedata.smsContent" id="content" rows="3"></textarea>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <div>
+                                    <div class="btn-file-input">
+                                    	<input type="file" id="sendNumber" onchange="angular.element(this).scope().importNumAndCont(2,this.files,this) " >
+                                    	<label>导入文件</label>
+                                    </div>
+                                    <span style="color: #397b51;padding-left: 20px;">{{filesName}}</span><br>
+                                    <span style="color: #f40000;">第一列必须为手机号码<a class="ml-3" href="../../public/file/importsendSms.xls">模板下载</a></span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <div style="color: #f40000;">                                  
+                                    <p>编辑短信时，将excel第一行的列名作为动态变量放在两个%之间，系统会自动取得此列的文字，拼成各条不同的短信发送出去</p>
+                                    <p>短信内容为：</p>
+                                    <p>尊敬的%客户姓名%先生/女士，您需要缴纳的费用如下：水费%水费%元，电费%电费%元，燃气费%燃气费%元。请尽快缴纳，谢谢合作。</p>
+                                    <p>收到的短信为：</p>
+                                    <p>尊敬的张小龙先生/女士，您需要缴纳的费用如下：水费160元，电费88.4元，燃气费120元。请尽快缴纳，谢谢合作。</p>
+                                </div>
+                            </div>  
+                            <button type="submit" class="btn btn-form-submit" ng-class="{true: 'inactive', false: ''}[returnShowB]" ng-disabled="returnShowB">提交</button>
+                        </div>
+                    </form>               		
+                </div>
+                <div class="col-3">
+                    <div class="card prompt-cont">
+                        <div class="card-header prompt-tit border-bottom-0">
+                            <i class="fa fa-info-circle"></i> 提示
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">订单类型分为: 营销和行业</p>                                            
+                            <p class="card-text">发送方式分为: 立即发送和定时发送</p>                                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loading-container" ng-show="showloading == 0">
+						<div class="spinner">
+							<div class="spinner-container container1">
+								<div class="circle1"></div>
+								<div class="circle2"></div>
+								<div class="circle3"></div>
+								<div class="circle4"></div>
+							</div>
+							<div class="spinner-container container2">
+								<div class="circle1"></div>
+								<div class="circle2"></div>
+								<div class="circle3"></div>
+								<div class="circle4"></div>
+							</div>
+							<div class="spinner-container container3">
+								<div class="circle1"></div>
+								<div class="circle2"></div>
+								<div class="circle3"></div>
+								<div class="circle4"></div>
+							</div>
+						</div>
+					</div>
+</div>

@@ -1,0 +1,38 @@
+laravel-mix  安装
+https://laravel-china.org/articles/12523/translated-laravel-mix-chinese-document
+https://www.cnblogs.com/bueatmeat/p/6704389.html#faq
+https://www.jianshu.com/p/6733ef8fd745
+
+bootstrap4
+https://v4.bootcss.com/docs/4.0/getting-started/introduction/
+
+ui-bootstrap4
+https://morgul.github.io/ui-bootstrap4/
+//test
+字体
+http://fontawesome.dashgame.com/
+
+ui-router插件
+https://ui-router.github.io/ng1/
+
+//接口地址
+http://dev.st-shanghai.cn:8081/swagger-ui.html
+
+//svn地址
+http://dev.st-shanghai.cn:21800/svn/dev/source/ic-project/trunk/ICCS-h5/
+用户名密码都是：xuyafang
+
+//蓝湖标注的地址：
+https://lanhuapp.com/url/iKo2V
+
+//原系统地址
+用户名：admin
+密码：zwx.zwx.0124
+http://dev.st-shanghai.cn:18091/ismg3/login/login.jsp  
+
+客户:a-kehu   Z?!ytU08  代理商:a-dls   #rZjp#o8
+客户经理：a-khjl frk_C7yS
+营销总监a-xszj  s$c7v^h7
+财务：1305910008   v8VBD9yQ
+销售经理：a-xsjl  S_jINyE9
+可用的销售经理：用户：wxxs密码：9sh&dVfQ

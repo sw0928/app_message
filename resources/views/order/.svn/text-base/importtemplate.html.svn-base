@@ -1,0 +1,102 @@
+<div class="modal-demo">   
+    <div class="modal-header justify-content-between">
+        <h3 class="modal-title" id="modal-title">导入模板</h3>        
+    	<button type="button" class="btn btn-outline-close" ng-click="cancel()"><i class="fa fa-remove"></i></button>
+    </div>
+    <div class="modal-body" id="modal-body">
+    	<form class="table-form p-2 bg-fb mb-2 border d-flex" ng-submit="searchtable()">
+			<div class="form-group mr-1 mb-0">
+				<label for="content">内容</label>
+			    <input type="text" class="form-control no-control" ng-model="searchdata.tmplateContent" id="content">
+			</div>
+			<div class=" text-nowrap align-self-end">
+		      	<button type="submit" class="btn btn-sm ensure mr-1">查询</button>
+		      	<button type="button" class="btn btn-sm btn-outline-info mr-1" ng-click="resetFrom()">重置</button>
+				<button type="button" class="btn btn-sm cancel" ng-click="cancel()">关闭</button>
+		    </div>
+		    <!--<div class="ml-4">
+		    	<span class="text-danger">注：</span> 1、Excel批量导入，可以一次导入多个手机号码，每个手机号码对应不同的变量值，可以实现给不同手机号码发送不同的短信内容。点击 <a href ng-click="showDetail()">查看详细说明</a> 
+				<br>2、下载模板请点击<a href="../../public/file/importsendSms3.xls" download="importsendSms3.xls">下载模板</a>
+		    </div>-->
+    	</form>
+    	<div class="order-browse">
+		    <div class="card">
+		        <div class="card-header clearfix">                                
+		            <ul class="order-list-type d-flex float-left">
+		                <li class="list-item active"><a href>通过模板列表</a></li>
+		            </ul>
+		        </div>
+		        <div class="card-body order-body bg-fb">
+					<div class="user-list">
+					  	<div class="table-responsive">
+					  		<table class="table table-list table-hover">
+								<thead>
+								    <tr>
+								      	<th scope="col">模板分类</th>
+								      	<th scope="col">模板内容</th>
+								      	<th scope="col">可变参数数量</th>
+								      	<th scope="col">时间</th>
+								      	<th scope="col">操作</th>
+								    </tr>
+								</thead>
+								<tbody>
+									<tr ng-if="tablelistdata.data.length == 0"><td colspan="5">暂无数据</td></tr>
+								    <tr ng-repeat="template in tablelistdata.data" ng-if="tablelistdata.data.length > 0">
+									    <td>{{template.templateType == 1?'行业短信':'广告营销'}}</td>
+									    <td ng-bind-html="template.modWord"></td>				    
+									    <td>{{template.replaceNumber}}</td>
+									    <td class="text-nowrap">{{template.createTime}}</td>
+									    <td class="text-nowrap">
+									    	<button type="button" class="btn btn-xs btn-primary" ng-click="importoperate(template)">导入</button>
+									    	<!--<div class="btn-file-input">
+		                                    	<input type="file" value="导入号码" onchange="angular.element(this).scope().importNumAndCont(3,this.files,this)">
+		                                    	<label>Excel批量导入</label>
+		                                    </div>-->
+									    </td>
+									</tr>
+								</tbody>
+							</table>
+							<div id="loading-container" ng-show="showloading == 0">
+									<div class="spinner">
+										<div class="spinner-container container1">
+											<div class="circle1"></div>
+											<div class="circle2"></div>
+											<div class="circle3"></div>
+											<div class="circle4"></div>
+										</div>
+										<div class="spinner-container container2">
+											<div class="circle1"></div>
+											<div class="circle2"></div>
+											<div class="circle3"></div>
+											<div class="circle4"></div>
+										</div>
+										<div class="spinner-container container3">
+											<div class="circle1"></div>
+											<div class="circle2"></div>
+											<div class="circle3"></div>
+											<div class="circle4"></div>
+										</div>
+									</div>
+								</div>
+					  	</div>
+					</div>
+					<div class="common-page mt-2 p-2 d-flex justify-content-center">
+				  		<ul class="pagination-sm mr-2" uib-pagination total-items="total" boundary-link-numbers="true" rotate="true" items-per-page="searchdata.pageSize" ng-model="searchdata.currentPage" max-size="8" boundary-links="true" num-pages="numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="searchtable()"></ul> 
+				  		<form class="btn-page-cont" ng-submit="getTableList()">
+				  			<select class="btn-page-sel mr-2" ng-model="searchdata.pageSize">
+				  				<option value="10">10条/页</option>
+				  				<option value="20">20条/页</option>
+				  				<option value="30">30条/页</option>
+				  			</select>
+				  			跳至  <input class="btn-page-input ml-2" ng-model="searchdata.currentPage" max="{{numPages}}" type="number"/> 页
+						</form>
+				  	</div>
+		        </div>
+		    </div>
+		</div>    	
+    </div>
+    <!--<div class="modal-footer align-items-center">
+        <button class="btn btn-sm btn-ensure" type="button" ng-click="ensure()">确定</button>
+        <button class="btn btn-sm btn-light btn-light-border" type="button" ng-click="cancel()">取消</button>
+    </div>  -->  
+</div>

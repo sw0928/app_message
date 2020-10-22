@@ -1,0 +1,81 @@
+<div class="modal-header justify-content-between">
+    <h3 class="modal-title" id="modal-title">用户定价</h3>
+    <button type="button" class="btn btn-outline-close" ng-click="cancel()"><i class="fa fa-remove"></i></button>
+</div>
+<form class="bg-fb" ng-submit="ensure()">
+    <div class="modal-body" id="modal-body">       
+      <div class="form-row">
+		    <div class="form-group col-md-6">
+		      	<label>登录名</label>
+		      	<input type="text" class="form-control" ng-model="basedata.loginName" disabled placeholder="请输入">
+		    </div>
+		    <div class="form-group col-md-6">
+		      	<label>用户名</label>
+		      	<input type="text" class="form-control" ng-model="basedata.userName" disabled placeholder="请输入">
+		    </div>
+			</div>
+		<div class="form-row">
+		    <div class="form-group col-md-6">
+		      	<label>通道类型</label>
+		      	<select class="form-control" ng-model="basedata.aisleType">
+		      		<option value="">请选择</option>
+		      		<option value="1">短信移动成功计费</option>
+		      		<option value="2">短信联通成功计费</option>
+		      		<option value="3">短信电信成功计费</option>
+		      		<option value="4">短信移动提交计费</option>
+		      		<option value="5">短信联通提交计费</option>
+		      		<option value="6">短信电信提交计费</option>
+		      		<option value="13">语音成功计费</option>
+		      		<option value="14">国际短信成功计费</option>
+		      	</select>
+		    </div>
+		    <div class="form-group col-md-6">
+		      	<label>单价（元）</label>
+		      	<input type="text" class="form-control"  ng-model="basedata.pricing" placeholder="请输入">
+		    </div>
+		</div>
+		<div class="form-row">
+		    <div class="form-group col-md-6">
+		      	<label>发送类型</label>
+		      	<select class="form-control" ng-model="basedata.sendType">
+					<option value="">请选择</option>
+		      		<option value="2">营销</option>
+		      		<option value="1">行业</option>
+		      	</select>
+		    </div>
+		</div>   
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button class="btn btn-sm btn-ensure" type="submit">确定</button>
+        <button class="btn btn-sm btn-light btn-light-border" type="button" ng-click="cancel()">取消</button>
+    </div>
+    <div class="table-list p-2">
+    	<h6 class="alert alert-info pl-1"><i class="fa fa-list-alt"></i> 已添加用户定价列表</h6>
+    	<table class="table">
+			<thead>
+			    <tr>
+			      <th scope="col">通道类型</th>
+			      <th scope="col">发送类型</th>
+			      <th scope="col">单价（元）</th>
+			      <th scope="col">操作</th>
+			    </tr>
+	 		</thead>
+			<tbody>
+				<tr ng-if="tabledata.length == 0"><td colspan="4">没有找到匹配的记录</td></tr>
+			    <tr ng-if="tabledata.length > 0" ng-repeat="dataitem in tabledata">
+			      <td scope="row">{{dataitem.sendType}}</td>
+			      <td>{{dataitem.templateType == 2?'营销':'行业'}}</td>
+			      <td>
+			      	<span ng-if="dataitem.sendType == '语音成功计费'">{{dataitem.unitPrice}}({{dataitem.unitTime}}秒)</span>
+			      	<span ng-if="dataitem.sendType != '语音成功计费'">{{dataitem.unitPrice}}</span>			      	
+			      </td>
+			      <td>
+			      	<button type="button"  class="btn btn-outline-success btn-xs btn-oval" ng-click="fixedPrice_amend(dataitem)">修改</button>
+			      	<!--<button type="button" class="btn btn-sm btn-link" ng-click="deletePrice(dataitem)">删除</button>-->
+			      	<button type="button" class="btn btn-xs btn-outline-danger btn-oval" ng-click="deletePrice(dataitem)">删除</button>
+			      </td>
+			    </tr>
+		  	</tbody>
+		</table>
+    </div>
+</form>

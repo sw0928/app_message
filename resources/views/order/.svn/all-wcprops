@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/dev/!svn/ver/1743/source/ic-project/trunk/ICCS-h5/st/resources/views/order
+END
+uplinklist.html
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/dev/!svn/ver/1681/source/ic-project/trunk/ICCS-h5/st/resources/views/order/uplinklist.html
+END
+detailTime.html
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/dev/!svn/ver/1681/source/ic-project/trunk/ICCS-h5/st/resources/views/order/detailTime.html
+END
+downlinklist.html
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/dev/!svn/ver/1681/source/ic-project/trunk/ICCS-h5/st/resources/views/order/downlinklist.html
+END
+voicelist.html
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/dev/!svn/ver/1681/source/ic-project/trunk/ICCS-h5/st/resources/views/order/voicelist.html
+END
+voicetemplate.html
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dev/!svn/ver/1681/source/ic-project/trunk/ICCS-h5/st/resources/views/order/voicetemplate.html
+END
+timinglist.html
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/dev/!svn/ver/1681/source/ic-project/trunk/ICCS-h5/st/resources/views/order/timinglist.html
+END
+importtemplate.html
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/dev/!svn/ver/1681/source/ic-project/trunk/ICCS-h5/st/resources/views/order/importtemplate.html
+END
+orderlist.html
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/dev/!svn/ver/1743/source/ic-project/trunk/ICCS-h5/st/resources/views/order/orderlist.html
+END
+importuser.html
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/dev/!svn/ver/1681/source/ic-project/trunk/ICCS-h5/st/resources/views/order/importuser.html
+END
+importcontracts.html
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dev/!svn/ver/1681/source/ic-project/trunk/ICCS-h5/st/resources/views/order/importcontracts.html
+END

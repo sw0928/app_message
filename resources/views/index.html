@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="baseApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据中心</title>
+    <link rel="stylesheet" href="../../public/css/index.css">
+    <script src="../../public/js/vendor/jquery.min.js"></script>
+    <!--<script src = "https://cdn.polyfill.io/v2/polyfill.min.js"></script>-->
+    <script src="../../public/js/polyfill.js"></script>
+    <script src="../../public/js/index.js"></script>
+    <script src="../../public/js/resize.js"></script>
+</head>
+<body class="h-100" ng-cloak>
+    <div class="w-100 h-100">
+        <div class="d-flex min-height" ng-controller="mainController">
+            <div class="common-aside" ng-class="asideIsOpen?'':'fold'" ng-controller="commonaside">
+				<div class="aside-bg" style="padding-bottom: 10px;">
+					<div class="aside-btn text-right pr-4">
+						<button type="button" class="btn btn-link" ng-click="toggleAside()"><i class="fa fa-dedent"></i></button>
+						<button type="button" class="btn btn-link" ng-show="!asideIsOpen" ng-click="toggleAside()"><i class="fa fa-indent"></i></button>                  
+					</div>
+					<div class="logo-img">
+						<img src="../../public/image/logo.png" alt="">
+					</div>
+					<div class="user-head">
+						<h4>欢迎登陆</h4>
+						<h1 class="user-identity">
+							<b ng-bind="returnAccountType()"></b>
+							<span>账户类型</span>
+						</h1>
+						<div class="other-info" style="word-break: break-all;" ng-if="userInfo.forceIp != null">
+							<span>绑定IP</span> {{userInfo.forceIp}}
+						</div>
+						<div class="other-info">
+							<span>最后登陆IP</span> {{userInfo.lastLoginIp}}
+						</div>
+						<div class="other-info">
+							<span>最后登陆时间</span> {{userInfo.lastLoginTime}}
+						</div>
+					</div>
+					<div>
+						<div class="user-info" ng-show="per.asideswitch == 1 || per.showLeft == 1">
+							<div class="row">
+								<div class="col-6">
+									<p class="info-tit">用户名</p>
+									<p class="info-text">{{userInfo.userName}}</p>
+								</div>
+								<div class="col-6 text-right">
+									<p class="info-tit">用户状态</p>
+									<span class="info-block">有效</span>
+                  <!--<span class="info-block" ng-class="userInfo.accountStatus == 1?'':'wuyong'">{{userInfo.accountStatus == 1?'有效':'无效'}}</span> -->					
+								</div>
+								<div class="col-6">
+									<p class="info-tit">登陆名</p>
+									<p class="info-text">{{userInfo.loginName?userInfo.loginName:'暂无'}}</p>
+								</div>   
+								<div class="col-6 text-right">
+									<p class="info-tit">省份</p>
+									<p class="info-text">{{userInfo.province?userInfo.province:'暂无'}}</p>
+								</div>   
+								<div class="col-6">
+									<p class="info-tit">手机号</p>
+									<p class="info-text">{{userInfo.mobilePhone?userInfo.mobilePhone:'暂无'}}</p>
+								</div>   
+								<div class="col-6 text-right">
+									<p class="info-tit">地市</p>
+									<p class="info-text">{{userInfo.city?userInfo.city:'暂无'}}</p>
+								</div>
+								<div class="col-6">
+									<p class="info-tit ">MFA设置</p>
+								</div>
+								<div class="col-6 text-right">
+									<!--<span class="info-block">启用</span>-->
+                  <span class="info-block sw-colA" ng-click="userInfo.mfaState ==2?mfaUnbundle():mfaSend()" ng-class="userInfo.mfaState == 2?'wuyong':''">{{userInfo.mfaState == 2?'禁止':'启用'}}</span> 					
+								</div>
+								<div class="col-10">
+									<p class="info-tit">回执地址</p>
+									<p class="info-text text-truncate">{{userInfo.httpDeliver}}</p>
+								</div> 
+								<div class="col-2 text-right">									
+									<a href="" ng-click="receiptSite(userInfo.httpDeliver)"><i class="fa fa-pencil fa-fw"></i></a>
+								</div>
+								<div class="col-12 text-right aside-btns">
+									<div class="btn-group" uib-dropdown>
+										<button id="split-button" type="button" class="btn-aside" ng-click="modifyPassword()">修改密码</button>
+										<!-- <button type="button" class="border-left-0 btn-aside" uib-dropdown-toggle>                                                    
+											<span class="sr-only">Split button!</span>
+										</button>
+										<ul class="dropdown-menu menu-list" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+											<li role="dropdown-item">其他操作</li>
+										</ul> -->
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="help-center" ng-show="per.asideswitch == 1">
+							<h1>帮助中心</h1>
+							<div class="card bg-gray help-wrapper">
+								<div class="card-header help-tit p-2 d-flex justify-content-between">
+									<div class="help-tit-cont">
+										<span ng-class="helpswitch == 1 ?'active':''" ng-click="helpswitch = 1">常见问题</span>
+										<span ng-class="helpswitch == 2 ?'active':''" ng-click="helpswitch = 2">文档下载</span>
+										<span ng-class="helpswitch == 3 ?'active':''" ng-click="helpswitch = 3">查看代码</span>
+									</div>
+									<div class="help-btn-cont pt-1" ng-show="!showSearchText">
+										<i ng-click="showSearchText = !showSearchText" class="fa fa-search"></i>
+									</div>
+									<form class="help-btn-cont pt-1" ng-show="showSearchText" ng-submit="searchHelpenter()">
+										<input type="text" ng-model="searchcontent" placeholder="请输入要搜索的常见问题和文档"><i ng-click="showSearchText = !showSearchText" tooltip-placement="top" uib-tooltip="" class="fa fa-remove"></i>
+									</form>
+								</div>
+								<!--<div class="card-body">-->
+								<div class="card-body" ng-class="userInfo.forceIp != null? 'sw_cardB':'sw_cardH'">
+									<div class="ques-list" ng-if="helpswitch == 1">
+										<ul class="list-group list-group-flush">
+											<li class="list-group-item" ng-repeat="question in questionList.data">
+												<h6 class="ques-tit">{{question.questionMsg}}</h6>
+												<p class="ques-cont">{{question.answerMsg}}</p>
+											</li>
+										</ul>
+									</div>
+									<div class="doc-list" ng-if="helpswitch == 2">
+										<h4>接口文档</h4>
+										<ul>
+											<li class="doc-item d-flex justify-content-between">
+												<span>HTTP协议4.0.doc</span> <a href="">下载</a>
+											</li>
+											<li class="doc-item d-flex justify-content-between">
+												<span>HTTP协议4.0.doc</span> <a href="">下载</a>
+											</li>
+										</ul>
+									</div>
+									<div class="code-list" ng-if="helpswitch == 3">
+										<span>import</span> java.io.IOException; <br>
+										<span>import</span> java.io.StringWriter;<br>
+										<span>import</span> java.util.ArrayList;<br>
+										<span>import</span> java.util.List;<br>
+										
+										<span>import</span> org.apache.http.HttpResponse;<br>
+										<span>import</span> org.apache.http.NameValuePair;<br>
+										<span>import</span> org.apache.http.client.entity.UrlEncodedFormEntity;<br>
+										<span>import</span> org.apache.http.client.methods.HttpPost;<br>
+										<span>import</span> org.apache.http.impl.client.CloseableHttpClient;<br>
+										<span>import</span> org.apache.http.impl.client.HttpClients;<br>
+										<span>import</span> org.apache.http.message.BasicNameValuePair;<br>
+										<span>import</span> org.apache.http.util.EntityUtils;<br>
+										<span>import</span> org.dom4j.Document;<br>
+										<span>import</span> org.dom4j.Element;<br>
+										<span>import</span> org.dom4j.Node;<br>
+										<span>import</span> org.dom4j.io.OutputFormat;<br>
+										<span>import</span> org.dom4j.io.SAXReader;<br>
+										<span>import</span> org.dom4j.io.XMLWriter;<br>
+									</div>
+								</div>	                        
+							</div>
+						</div>
+						<!-- <div class="guanggao">
+							<img src="https://img.banghaiwai.com/uploads/2019-01-15/0AewUt66QU2gdhYoO2O2cg6L6LCQwlK7xjBrXZdD.png" alt="" class="w-100">
+						</div> -->
+					</div>
+					<!--<div ng-show="per.asideswitch == 2" class="transport order-browse-aside">
+						<h5 class="aside-tit">发送量</h5>
+						<div class="transport-cont">
+							<div class="top">
+								数据汇总
+							</div>
+							<div class="bottom d-flex justify-content-between">
+								<div class="item border-right">
+									<div class="mb-2">
+										<p>总量</p>
+										<span class="one">300</span>
+									</div>
+									<div class="">
+										<p>成功</p>
+										<span class="two">40</span>
+									</div>
+								</div>
+								<div class="item">
+									<div class="mb-2">
+										<p>未知</p>
+										<span class="three">220</span>
+									</div>
+									<div class="">
+										<p>失败</p>
+										<span class="four">40</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>-->
+					<div class="user-manage-cont" ng-show="per.asideswitch == 3">
+						<h5 class="aside-tit">账户信息</h5>
+						<div class="account-info">
+							<div class="title d-flex align-items-center">
+								<div class="tit-item" uib-popover="{{showAccountInfo?userdata.userAccount.balance+'元':'****'}}" popover-trigger="'mouseenter'">
+									<p>账户余额</p>
+									<span >{{showAccountInfo?userdata.userAccount.balance:'****'}}</span>
+								</div>
+								<div class="tit-item" uib-popover="{{showAccountInfo?userdata.userAccount.credit:'****'}}" popover-trigger="'mouseenter'">
+									<p>信用额度</p>
+									<span >{{showAccountInfo?userdata.userAccount.credit:'****'}}</span>
+								</div>
+								<div class="tit-item" style="padding-right: 4px;margin-left: 6px;">
+									<i ng-class="showAccountInfo?'fa fa-eye':'eye-close-icon'" ng-click="showAccountInfo = !showAccountInfo"></i>
+								</div>
+							</div>
+							<div class="wrapper">
+								<div class="wrapper-item d-flex flex-wrap" ng-if="userdata.userPrice.length > 0">
+									<div class="item-p border-right" ng-repeat="price in userdata.userPrice">
+										<p>{{price.sendType}}-{{price.templateType}}</p>
+										<b class="font-weight-normal">{{showAccountInfo?price.unitPrice+'元':'****'}}</b>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- <div class="sales-team">
+							<h5 class="aside-tit">销售团队</h5>
+							<div class="sales-team-list">
+								<div class="list-tit">
+									销售总监
+								</div>
+								<div class="list-cont">
+									<uib-accordion>
+										<div uib-accordion-group>
+											<uib-accordion-heading>上海机构  <i class="fa fa-angle-down"></i></uib-accordion-heading>
+											<div class="list-body">
+												<uib-accordion>
+													<div uib-accordion-group>
+														<uib-accordion-heading>销售1 <i class="fa fa-angle-down"></i></uib-accordion-heading>
+														<div class="list-wrap">
+															下拉内容	
+														</div>
+													</div>
+												</uib-accordion>
+											</div>
+										</div>
+										<div uib-accordion-group>
+											<uib-accordion-heading>深圳机构  <i class="fa fa-angle-down"></i></uib-accordion-heading>
+											<div class="list-tit">
+												下拉内容	
+											</div>
+										</div>	            					
+									</uib-accordion>
+								</div>
+							</div>
+						</div> -->
+					</div>
+					<div class="user-manage-cont contacts-manage" ng-show="per.asideswitch == 4">
+						<h5 class="aside-tit">联系人管理</h5>
+						<div class="sales-team">
+							<div class="sales-team-list">
+								<div class="list-tit clearfix">
+									分组管理    <button type="button" class="float-right btn btn-outline-info btn-xs mr-2" ng-click="addContactsGroup()">添加分组</button>
+								</div>
+								<div class="list-cont">
+									<!--<uib-accordion>
+										<div uib-accordion-group ng-repeat="group in contactsGroupList">
+											<uib-accordion-heading>
+												<i class="fa fa-angle-right"></i> {{group.groupName}}
+												<a href class="add-icon"><i class="fa fa-plus-square-o"></i></a>	
+												<a href class="reduce-icon" ng-click="delContactsgroup(group)"><i class="fa fa-minus-square-o"></i></a>            							
+											</uib-accordion-heading>
+											<div class="list-body">
+												成员-1
+											</div>
+										</div>        					
+									</uib-accordion>-->
+									<div class="list-group">
+									<li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" ng-repeat="group in contactsGroupList" ng-class="per.SelectedGroup == group.groupNo?'active':''" ng-click="selectedGroup(group)">
+										{{group.groupName}}
+										<a href class="reduce-icon badge" ng-click="delContactsgroup(group,$event)"><i class="fa fa-minus-square-o"></i></a>
+									</li>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--<div class="check-condition order-browse-aside" ng-show="per.asideswitch == 5">
+						<h5 class="aside-tit">审核情况</h5>
+						<div class="check-cont">
+							<div class="top text-left aside-btns">
+								<div class="btn-group" uib-dropdown>
+									<button id="split-button" type="button" class="border-right-0 btn-aside" ng-click="">近三个月</button>
+									<button type="button" class="border-left-0 btn-aside" uib-dropdown-toggle>                                                    
+										<span class="sr-only">Split button!</span>
+									</button>
+									<ul class="dropdown-menu menu-list" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+										<li role="dropdown-item">其他操作</li>
+									</ul>
+								</div>
+							</div>
+							<div class="bottom d-flex justify-content-between">
+								<div class="item">                				
+									<div class="border-right">
+										<p>充值未审核</p>
+										<span class="one">40</span>
+									</div>
+								</div>
+								<div class="item">               				
+									<div class="border-right">
+										<p>授信未审核</p>
+										<span class="two">40</span>
+									</div>
+								</div>
+								<div class="item">               				
+									<div class="">
+										<p>退款未审核</p>
+										<span class="three">40</span>
+									</div>
+								</div>
+							</div>
+							<div ng-init="getCheckSituation()" class="check-statistics">
+								<div id="check-situation" style="width: 100%; height: 340px;"></div>
+							</div>
+						</div>
+					</div>-->
+					<!--<div class="expense-amount expense-condition order-browse-aside" ng-show="per.asideswitch == 6">
+						<h5 class="aside-tit">消费量情况</h5>
+						<div class="check-cont">
+							<div class="top text-left aside-btns">
+								<div class="btn-group" uib-dropdown>
+									<button id="split-button" type="button" class="border-right-0 btn-aside" ng-click="">本月</button>
+									<button type="button" class="border-left-0 btn-aside" uib-dropdown-toggle>                                                    
+										<span class="sr-only">Split button!</span>
+									</button>
+									<ul class="dropdown-menu menu-list" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+										<li role="dropdown-item">其他操作</li>
+									</ul>
+								</div>
+							</div>
+							<div class="bottom d-flex justify-content-between">
+								<div class="item">                				
+									<div class="border-right">
+										<p>充值量</p>
+										<span class="one">240</span>
+									</div>
+								</div>
+								<div class="item">               				
+									<div class="">
+										<p>消费量</p>
+										<span class="two">200</span>
+									</div>
+								</div>
+							</div>
+							<div class="expense-statistics">
+								<div ng-init="getExpenseStatistics()" id="consumption" style="width:100%;height:200px"></div>
+							</div>
+						</div>
+					</div>-->
+					<!--<div class="expense-amount expense-condition order-browse-aside" ng-show="per.asideswitch == 7">
+						<h5 class="aside-tit">审核情况</h5>
+						<div class="check-cont">
+							<div class="top form-inline">
+								<select class="form-control form-control-sm" ng-model="templateMonth" ng-change="getAuditsituation()">
+									<option value="">当月</option>
+									<option ng-repeat="month in per.monthList" value="{{month.value}}">{{month.text}}</option>
+								</select>
+							</div>
+							<div class="bottom d-flex justify-content-between">
+								<div class="item" ng-repeat="template in templateData">                				
+									<div ng-class="$last?'':'border-right'">
+										<p>{{template.REVIEW}}</p>
+										<span class="{{template.REVIEW == '已审核'?'one':(template.REVIEW == '已拒绝'?'two':'three')}}">{{template.CUT}}</span>
+									</div>
+								</div>
+							</div>
+							<div class="expense-statistics">
+								<div ng-init="getAuditsituation()" id="auditsituation" style="width:100%;height:200px"></div>
+							</div>
+						</div>
+					</div>-->
+					<!--<div class="expense-amount expense-condition order-browse-aside" ng-show="per.asideswitch == 8">
+						<h5 class="aside-tit">审核情况</h5>
+						<div class="check-cont">
+							<div class="top form-inline">
+								<select class="form-control form-control-sm" ng-model="signatureMonth" ng-change="getSignatureaudit()">
+									<option value="">当月</option>
+									<option ng-repeat="month in per.monthList" value="{{month.value}}">{{month.text}}</option>
+								</select>
+							</div>
+							<div class="bottom d-flex justify-content-between">
+								<div class="item" ng-repeat="signature in signatureData">                				
+									<div ng-class="$last?'':'border-right'">
+										<p>{{signature.REVIEW}}</p>
+										<span class="{{signature.REVIEW == '已审核'?'one':'two'}}">{{signature.CUT}}</span>
+									</div>
+								</div>
+							</div>
+							<div class="expense-statistics">
+								<div ng-init="getSignatureaudit()" id="signatureaudit" style="width:100%;height:200px"></div>
+							</div>
+						</div>
+					</div>-->
+				</div>
+            </div>
+            <div class="common-main" ng-class="asideIsOpen?'':'w-100'" ng-controller="homepage">
+                <div class="nav-list d-flex justify-content-between">
+                    <ul class="d-flex pl-2">
+                        <li ng-if="SysPermission.showDataCenter()" class="nav-item"><a ui-sref-active="active" ui-sref="datacenter">数据中心</a></li>
+                        <li ng-if="SysPermission.showSave()" class="nav-item">
+                        	<a ui-sref="{{navSaveUrl()}}" ng-class="per.navmodel == 'saveordermodule'?'active':''">提交订单</a></li>
+                        <li ng-if="SysPermission.showOrder()" class="nav-item">
+							<a ui-sref="{{navOrderUrl()}}" ng-class="per.navmodel == 'ordermodule'?'active':''">订单浏览</a>
+						</li>
+                        <li ng-if="SysPermission.showUsers()" class="nav-item">
+                        	<a ui-sref="{{navUsersUrl()}}" ng-class="per.navmodel == 'usermodule'?'active':''">用户管理</a></li>
+                        <li ng-if="SysPermission.showContacts()" class="nav-item">
+                        	<a ui-sref="{{navContactsUrl()}}" ng-class="per.navmodel == 'contactmodule'?'active':''">联系人管理</a></li>
+                        <li ng-if="SysPermission.showNavRecharge()" class="nav-item">
+							<a ui-sref="{{navRechargeUrl()}}" ng-class="per.navmodel == 'rechargemodule'?'active':''">充值记录</a>
+						</li>
+                        <li ng-if="SysPermission.showConsume()" class="nav-item">
+							<a ui-sref="{{navExpenseUrl()}}" ng-class="per.navmodel == 'expensemodule'?'active':''">消费记录</a>
+						</li>
+                        <li ng-if="SysPermission.showTemplate()" class="nav-item">
+                        	<a ui-sref="{{navTemplateUrl()}}" ng-class="per.navmodel == 'templatemodule'?'active':''">模板申请</a></li>
+                        <li ng-if="SysPermission.showSignature()" class="nav-item">
+                        	<a ui-sref="{{navSignatureUrl()}}" ng-class="per.navmodel == 'signaturemodule'?'active':''">签名申请</a></li>
+                        <li ng-if="SysPermission.showStatistics()" class="nav-item">
+                        	<a ui-sref="{{navStatisticsUrl()}}" ng-class="per.navmodel == 'statisticsmodule'?'active':''">业绩统计</a></li>
+                        
+					</ul>
+					<ul class="pr-2">
+						<li class="nav-item"><a href ng-click="logout()"><i class="fa fa-power-off"></i></a></li>
+					</ul>
+                </div>               
+                <div class="main-cont">
+                	<!-- 描述：路由视图  -->
+                    <ui-view></ui-view>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

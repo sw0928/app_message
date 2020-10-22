@@ -1,0 +1,58 @@
+<div class="modal-demo">
+	<div class="modal-header">
+		<h3 class="modal-title" id="modal-title">退款申请</h3>
+	</div>
+	<form ng-submit="">
+		<div class="modal-body" id="modal-body">
+			<div class="form-row">
+				<div class="form-group col">
+					<label for="fromUserName">退款账号</label>
+					<input type="text" ng-model="basedata.fromUserName" class="form-control" id="fromUserName" readonly>
+				</div>
+				<div class="form-group col">
+					<label for="group">退款到财务账号</label>
+						<input type="text" ng-model="basedata.recharger" class="form-control" id="recharger" readonly>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col">
+					<label for="company">公司名称</label>
+					<input type="text" class="form-control" ng-model="basedata.company" readonly id="company" placeholder="请输入">
+				</div>
+				<div class="form-group col">
+					<label for="money">退款金额</label>
+					<input type="text" class="form-control" ng-model="basedata.money" readonly id="money" placeholder="请输入">
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-6">
+					<label for="note">退款状态</label>
+					<select ng-model="basedata.status" class="form-control" id="status" disabled>
+						<option value="0">未结束</option>
+						<option value="1">未审核</option>
+						<option value="2">已审核</option>
+						<option value="3">已充值</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col">
+					<label for="note">备注</label>
+					<textarea class="form-control" ng-model="basedata.remark" readonly rows="3" id="note"></textarea>
+				</div>
+				<div class="form-group col">
+					<label for="note">驳回原因</label>
+					<textarea class="form-control" ng-model="basedata.rejectMsg" rows="3" id="note1" readonly></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer justify-content-center">
+			<button class="btn btn-sm btn-ensure" ng-if="basedata.status == 1&&SysPermission.showRecharge()" type="button" ng-click="auditAddMoneyFlow(2)">审核</button>
+			<button class="btn btn-sm btn-outline-warning" ng-if="basedata.status == 2&&SysPermission.showRecharge()" type="button" ng-click="auditAddMoneyFlow(1)">取消审核</button>
+			<button class="btn btn-sm btn-outline-success" ng-if="basedata.status == 2&&SysPermission.showRecharge()" type="button" ng-click="confirmrecharge()">立即充值</button>
+			<button class="btn btn-sm btn-outline-danger" ng-if="basedata.status == 1&&per.currentuser == basedata.fromUserName" type="button" ng-click="deleteProcess()">删除</button>
+			<button class="btn btn-sm btn-outline-danger" ng-if="basedata.status == 1&&SysPermission.showRecharge()" type="button" ng-click="rejectProcess()">驳回</button>
+			<button class="btn btn-sm btn-light btn-light-border" type="button" ng-click="cancel()">关闭</button>
+		</div>
+	</form>
+</div>

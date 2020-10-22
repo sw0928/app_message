@@ -1,0 +1,19 @@
+<div class="modal-demo">   
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">驳回原因</h3>
+    </div>
+    <form ng-submit="auditExtension(4)">   
+	    <div class="modal-body" id="modal-body">	    				
+			<div class="form-row">
+			    <div class="form-group col">
+			      	<label for="note">备注</label>
+			      	<textarea ng-model="basedata.remark" class="form-control" rows="3" id="note"></textarea>
+			    </div>
+			</div>
+	   	</div>
+	    <div class="modal-footer justify-content-center">
+	        <button class="btn btn-sm btn-ensure" type="submit">确定</button>
+	        <button class="btn btn-sm btn-light btn-light-border" type="button" ng-click="cancel()">关闭</button>
+	    </div>
+    </form>
+</div>

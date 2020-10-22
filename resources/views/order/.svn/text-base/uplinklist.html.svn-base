@@ -1,0 +1,98 @@
+<div class="common-list uplink-list">
+    <form class="table-form" ng-submit="searchTable()">
+	  	<div class="d-flex">
+		    <div class="form-group mr-1">
+				<label for="upstartdate">开始时间</label>
+				<div class="input-group input-group-sm">
+					<input def-laydate type="text" id="upstartdate" datetype="datetime" ng-model="searchdata.startDate" placeholder="请选择日期" class="layui-input form-control"/>
+					<div class="input-group-append">
+					  <button class="btn btn-outline-secondary" type="button"><i class="fa fa-clock-o fa-time-icon"></i></button>
+					</div>
+				</div>
+		    </div>
+		    <div class="form-group mr-1">
+				<label for="upenddate">结束时间</label>
+				<div class="input-group input-group-sm">
+					<input def-laydate type="text" id="upenddate" datetype="datetime" ng-model="searchdata.endDate" placeholder="请选择日期" class="layui-input form-control"/>
+					<div class="input-group-append">
+					  <button class="btn btn-outline-secondary" type="button"><i class="fa fa-clock-o fa-time-icon"></i></button>
+					</div>
+				</div>
+		    </div>
+		    <div class="form-group mr-1">
+		      	<label for="loginName">提交人</label>
+		      	<input type="text" ng-model="searchdata.loginName" id="loginName" class="form-control">
+		    </div>
+		    <div class="form-group mr-2">
+		      	<label for="phone">上行号码</label>
+		      	<input type="text" id="phone" ng-model="searchdata.phone" class="form-control">
+		    </div>
+		   <!-- <div class="form-group mr-1">
+		      	<label for="inputZip">内容</label>
+		      	<input type="text" class="form-control">
+		    </div>-->
+		    <div class="form-group align-self-end text-nowrap">
+		      	<button type="submit" class="btn btn-sm ensure mr-2">查询</button>
+				<button type="button" class="btn btn-sm cancel" ng-click="resetFrom()">重置</button>
+		    </div>
+		</div>
+  	</form>
+  	<div class="table-responsive">
+  		<table class="table table-list table-hover">
+			<thead>
+			    <tr>
+			    		<th scope="col">用户名</th>			      	
+			      	<th scope="col">手机号码</th>
+			      	<th scope="col" style="min-width: 160px;">归属地</th>
+			      	<th scope="col" style="min-width: 160px;">接收时间</th>
+			      	<th scope="col">内容</th>			      
+			      	<!--<th scope="col">接收号码</th>-->
+			    </tr>
+			</thead>
+			<tbody>
+				<tr ng-if="tablelistdata.data.length == 0"><td colspan="5">暂无数据</td></tr>
+				<tr ng-if="tablelistdata.data.length > 0" ng-repeat="dataitem in tablelistdata.data" class="border-bottom-0">
+					<td>{{dataitem.loginName}}</td>					
+					<td>{{dataitem.srcTerminalId}}</td>
+					<td>{{dataitem.province}}</td>
+					<td>{{dataitem.receiptTime | limitTo:19}}</td>
+					<td>{{dataitem.receiptText}}</td>				    					
+					<!--<td>{{dataitem.destId}}</td>	-->	    
+				</tr>
+			</tbody>
+		</table>
+		<div id="loading-container" ng-show="showloading == 0">
+					<div class="spinner">
+						<div class="spinner-container container1">
+						  <div class="circle1"></div>
+						  <div class="circle2"></div>
+						  <div class="circle3"></div>
+						  <div class="circle4"></div>
+						</div>
+						<div class="spinner-container container2">
+						  <div class="circle1"></div>
+						  <div class="circle2"></div>
+						  <div class="circle3"></div>
+						  <div class="circle4"></div>
+						</div>
+						<div class="spinner-container container3">
+						  <div class="circle1"></div>
+						  <div class="circle2"></div>
+						  <div class="circle3"></div>
+						  <div class="circle4"></div>
+						</div>
+					</div>
+		</div>
+  	</div>
+  	<div class="common-page mt-2 p-2 d-flex justify-content-center">
+  		<ul class="pagination-sm mr-2" uib-pagination total-items="searchdata.total" boundary-link-numbers="true" rotate="true" items-per-page="searchdata.pageSize" ng-model="searchdata.currentPage" max-size="8" boundary-links="true" num-pages="numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="getTableList()"></ul> 
+  		<from class="btn-page-cont" ng-submit="getTableList()">
+  			<select class="btn-page-sel mr-2" ng-model="searchdata.pageSize" ng-change="searchTable()">
+  				<option value="10">10条/页</option>
+  				<option value="20">20条/页</option>
+  				<option value="30">30条/页</option>
+  			</select>
+  			跳至  <input class="btn-page-input ml-2" ng-model="searchdata.currentPage" max="{{numPages}}" type="number" ng-change="getTableList()"/> 页
+  		</from>
+  	</div>
+</div>

@@ -1,0 +1,60 @@
+<div class="modal-demo">   
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">退款申请</h3>
+    </div>
+    <form ng-submit="ensure()">   
+	    <div class="modal-body" id="modal-body">
+	    	<div class="form-row">
+			    <!--<div class="form-group col">
+			      	<label for="group">退款账号</label>
+			      	<select class="form-control" ng-model="basedata.recharger" ng-options="item.loginName for item in usersList">
+								<option value="">请选择</option>
+							</select>
+			    </div>-->
+			    <div class="form-group col">
+					<label>退款账号</label>
+					<ui-select ng-model="basedata.recharger" theme="bootstrap">
+						<ui-select-match placeholder="选择用户...">{{$select.selected.loginName}}</ui-select-match>
+						<ui-select-choices repeat="item in usersList | filter: $select.search">
+							<div ng-bind-html="item.loginName | highlight: $select.search"></div>
+						</ui-select-choices>
+					</ui-select>
+				</div>
+			     <!--<div class="form-group col">
+			      	<label for="group">退款到财务账号</label>
+			      	<select class="form-control">
+			      		<option value="">财务</option>
+			      	</select>
+			    </div>-->
+			    <div class="form-group col">
+					<label for="sex">付款方式</label>
+					<select class="form-control" ng-model="basedata.payType">
+						<option value="">请选择</option>
+						<option value="1">预付款</option>
+						<option value="2">后付款</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-row">
+			    <div class="form-group col">
+			      	<label for="email">公司名称</label>
+			      	<input type="text" ng-model="basedata.company" class="form-control" id="company" placeholder="请输入">
+			    </div>
+			    <div class="form-group col">
+			      	<label for="sex">退款金额</label>
+			      	<input type="text" ng-model="basedata.money" class="form-control" id="money" placeholder="请输入">
+			    </div>
+			</div>
+			<div class="form-row">
+			    <div class="form-group col">
+			      	<label for="note">备注</label>
+			      	<textarea ng-model="basedata.remark" class="form-control" rows="3" id="note"></textarea>
+			    </div>
+			</div>
+	   	</div>
+	    <div class="modal-footer justify-content-center">
+	        <button class="btn btn-sm btn-ensure" type="submit">新增</button>
+	        <button class="btn btn-sm btn-light btn-light-border" type="button" ng-click="cancel()">关闭</button>
+	    </div>
+    </form>
+</div>

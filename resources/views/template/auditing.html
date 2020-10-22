@@ -1,0 +1,62 @@
+<div class="modal-header justify-content-between">
+    <h3 class="modal-title" id="modal-title">申请模板</h3>
+    <button type="button" class="btn btn-outline-close" ng-click="cancel()"><i class="fa fa-remove"></i></button>
+</div>
+<form class="bg-fb" ng-submit="ensure()">
+	<div class="modal-content">
+	    <div class="modal-body" id="modal-body">
+	    	<div class="form-row">
+			    <div class="form-group col-md-12">
+			      	<label><span class="text-danger">*</span> 模板内容</label>
+					  <textarea kindeditor is-disabled="true" class="form-control" ng-model="basedata.templateSms"></textarea>
+			    </div>		  
+			</div>	
+	        <div class="form-row">
+			    <div class="form-group col-md-6">
+			      	<label><span class="text-danger">*</span> 模板分类</label>
+			      	<select class="form-control" ng-model="basedata.templateType" disabled>
+			      		<option value="1">行业短信</option>
+						<option value="2">营销广告</option>
+			      	</select>
+			    </div>
+			    <div class="form-group col-md-6">
+			      	<label>申请人</label>
+			      	<input type="text" class="form-control" disabled ng-model="basedata.applicant" placeholder="请输入">
+			    </div>		    
+			</div>
+			<div class="form-row">
+			    <div class="form-group col-md-6">
+			      	<label class="mr-3">挂机模板</label>
+			      	<div class="pretty p-icon p-round mr-2">
+	                    <input type="radio" name="hanging" disabled ng-model="basedata.hanging" value="1" id="yes"/>
+	                    <div class="state p-success">
+	                        <i class="icon fa fa-check"></i>
+	                        <label for="yes">是</label>
+	                    </div>
+	                </div>
+			      	<div class="pretty p-icon p-round mr-2">
+	                    <input type="radio" name="hanging" disabled ng-model="basedata.hanging" value="0" id="no"/>
+	                    <div class="state p-success">
+	                        <i class="icon fa fa-check"></i>
+	                        <label for="no">否</label>
+	                    </div>
+	                </div>
+			    </div>
+			    <div class="form-group col-md-6">
+			      	<label>主机号码</label>
+			      	<input type="text" class="form-control" disabled ng-disabled="basedata.hanging == 1?false:true" ng-model="basedata.miguMobile" placeholder="请输入">
+			    </div>
+			</div>	
+			<div class="form-row">
+			    <div class="form-group col-md-12">
+			      	<label>备注</label>
+			      	<textarea class="form-control" disabled ng-model="basedata.remark" rows="3"></textarea>
+			    </div>
+			</div> 
+	    </div>
+	    <div class="modal-footer justify-content-center">
+	        <button class="btn btn-sm btn-ensure" type="submit">拒绝</button>
+	        <button class="btn btn-sm btn-light btn-light-border" type="button" ng-click="cancel()">关闭</button>
+	    </div>
+    </div>
+</form>

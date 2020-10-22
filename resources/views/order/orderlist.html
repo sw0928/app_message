@@ -1,0 +1,161 @@
+<div class="common-list order-list">
+   	<form class="table-form" ng-submit="searchTable(searchdata)">
+	  	<div class="d-flex flex-wrap align-items-end">
+		    <div class="form-group mr-1">
+				<label for="orderstartdate">开始时间</label>			
+				<div class="input-group input-group-sm">
+					<input def-laydate type="text" id="orderstartdate" datetype="datetime" ng-model="searchdata.startDate" placeholder="请选择日期" class="layui-input form-control"/>
+					<div class="input-group-append">
+					  <button class="btn btn-outline-secondary" type="button"><i class="fa fa-clock-o fa-time-icon"></i></button>
+					</div>
+				</div>
+		    </div>
+		    <div class="form-group mr-1">
+				<label for="orderenddate">结束时间</label>
+				<div class="input-group input-group-sm">
+					<input def-laydate type="text" id="orderenddate" datetype="datetime" ng-model="searchdata.endDate" placeholder="请选择日期" class="layui-input form-control"/>
+					<div class="input-group-append">
+					  <button class="btn btn-outline-secondary" type="button"><i class="fa fa-clock-o fa-time-icon"></i></button>
+					</div>
+				</div>
+		    </div>
+		    <div class="form-group mr-1">
+			    <label for="sendtype">发送类型</label>
+			    <select id="sendtype" ng-model="searchdata.sendType" class="form-control">
+					<option value="">请选择</option>
+					<!-- <option value="4">营销</option>
+					<option value="2">行业</option>   -->          
+			        <option value="1">短信移动成功计费</option>
+			        <option value="2">短信联通成功计费</option>
+			        <option value="3">短信电信成功计费</option>
+			        <option value="4">短信移动提交计费</option>
+			        <option value="5">短信联通提交计费</option>
+			        <option value="6">短信电信提交计费</option>
+			        <option value="13">语音成功计费</option>
+			    </select>
+		    </div>
+		    <div class="form-group mr-1">
+		      	<label for="submitperson">提交人</label>
+		      	<input type="text" ng-model="searchdata.loginName" id="submitperson" class="form-control">
+			</div>
+			<!--<div class="form-group mr-1">
+				<label for="mobileNumber">手机号</label>
+				<input type="text" ng-model="searchdata.mobileNumber" id="mobileNumber" class="form-control">
+			</div>-->
+		    <div class="form-group mr-1">
+		      	<label for="templatecont">内容</label>
+		      	<input type="text" ng-model="searchdata.msgContent" id="templatecont" class="form-control">
+		    </div>
+		    <!--<div class="form-group text-nowrap mr-1">
+		      	<div class="pretty p-icon p-round mr-1 mb-2">
+                    <input type="radio" ng-model="searchdata.queryType" name="time" value="1" id="recent"/>
+                    <div class="state p-success">
+                        <i class="icon fa fa-check"></i>
+                        <label for="recent">近期(十天)</label>
+                    </div>
+                </div>
+                <div class="pretty p-icon p-round mr-1 mb-2">
+                    <input type="radio" ng-model="searchdata.queryType" name="time" value="2" id="history"/>
+                    <div class="state p-success">
+                        <i class="icon fa fa-check"></i>
+                        <label for="history">历史</label>
+                    </div>
+                </div>
+		    </div>-->
+		    <div class="form-group align-self-end text-nowrap">
+		      	<button type="submit" class="btn btn-sm ensure mr-2 pl-2 pr-2">查询</button>
+				<button type="button" class="btn btn-sm cancel pl-2 pr-2" ng-click="resetFrom()">重置</button>
+		    </div>
+		</div>
+  	</form>
+  	<div class="table-responsive">
+  		<table class="table table-list table-hover">
+			<thead>
+			    <tr>
+			      	<th scope="col">提交人</th>
+			      	<th scope="col" style="min-width: 100px;">用户名</th>
+			      	<th scope="col">提交时间</th>
+			      	<th scope="col">订单类型</th>
+			      	<th scope="col">发送类型</th>
+			      	<th scope="col">总量</th>
+			      	<th scope="col">发送成功量</th>
+			      	<th scope="col">状态成功</th>
+			      	<th scope="col">状态失败</th>
+			      	<th scope="col">状态未知</th>
+			      	<th scope="col">长短信</th>
+			      	<th scope="col">订单状态</th>
+			      	<th scope="col">操作</th>
+			    </tr>
+			</thead>
+			<tbody  ng-if="tablelistdata.data.length == 0">
+				<tr><td colspan="13">暂无数据</td></tr>
+			</tbody>
+			<tbody ng-if="tablelistdata.data.length > 0" ng-repeat="dataitem in tablelistdata.data">									
+			    <tr  class="border-bottom-0" >
+				    <td>
+				    	<a href ng-click="userDetil()">{{dataitem.submiter}}</a>				    	
+				    </td>
+				    <td>{{dataitem.subName}}</td>				    
+				    <td class="text-nowrap">{{dataitem.submitTime | limitTo:19 }}</td>
+				    <td>
+				    	<span ng-if="dataitem.templateType == 1">行业</span>
+				    	<span ng-if="dataitem.templateType == 2">营销</span>
+				    </td> 
+				    <td class="text-nowrap">
+				    	<span ng-if="dataitem.sendType == 1">短信移动成功计费</span>
+				    	<span ng-if="dataitem.sendType == 2">短信联通成功计费</span>
+				    	<span ng-if="dataitem.sendType == 3">短信电信成功计费</span>
+				    	<span ng-if="dataitem.sendType == 4">短信移动提交计费</span>
+				    	<span ng-if="dataitem.sendType == 5">短信联通提交计费</span>
+				    	<span ng-if="dataitem.sendType == 6">短信电信提交计费</span>
+				    	<span ng-if="dataitem.sendType == 13">语音成功计费</span>
+				    </td>
+				    <td>{{dataitem.mtTotal}}</td>
+				    <td>{{dataitem.mtSent}}</td>
+				    <td>{{dataitem.mtReceiptSuccess}}</td>
+				    <td>{{dataitem.receiptFailed}}</td>
+				    <td>{{dataitem.mtUnknow}}</td>
+				    <td>{{dataitem.msgTotal}}</td>
+				    <td>{{dataitem.cancelState}}</td>
+				    <td><button type="button" class="btn btn-xs btn-outline-success btn-oval" ng-click="showDetail(dataitem)">查看</button></td>				    
+			    </tr>
+			    <tr class="tr-info">
+			    	<td colspan="13">“{{dataitem.smsText}}”</td>
+				</tr>			
+			</tbody>
+		</table>
+		<div id="loading-container" ng-show="showloading == 0">
+					<div class="spinner">
+						<div class="spinner-container container1">
+						  <div class="circle1"></div>
+						  <div class="circle2"></div>
+						  <div class="circle3"></div>
+						  <div class="circle4"></div>
+						</div>
+						<div class="spinner-container container2">
+						  <div class="circle1"></div>
+						  <div class="circle2"></div>
+						  <div class="circle3"></div>
+						  <div class="circle4"></div>
+						</div>
+						<div class="spinner-container container3">
+						  <div class="circle1"></div>
+						  <div class="circle2"></div>
+						  <div class="circle3"></div>
+						  <div class="circle4"></div>
+						</div>
+					</div>
+		</div>
+  	</div>
+  	<div class="common-page mt-2 p-2 d-flex justify-content-center">
+  		<ul class="pagination-sm mr-2" uib-pagination total-items="searchdata.total" boundary-link-numbers="true" rotate="true" items-per-page="searchdata.pageSize" ng-model="searchdata.currentPage" max-size="8" boundary-links="true" num-pages="numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="getTableList()"></ul> 
+  		<form class="btn-page-cont" ng-submit="getTableList()">
+  			<select class="btn-page-sel mr-2" ng-model="searchdata.pageSize" ng-change="searchTable()">
+  				<option value="10">10条/页</option>
+  				<option value="20">20条/页</option>
+  				<option value="30">30条/页</option>
+  			</select>
+  			跳至  <input ng-model="searchdata.currentPage" class="btn-page-input ml-2" max="{{numPages}}" type="number" ng-change="getTableList()"/> 页
+  		</form>
+  	</div>
+</div>

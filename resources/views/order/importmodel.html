@@ -1,0 +1,29 @@
+<div class="modal-demo">   
+    <div class="modal-header justify-content-between">
+        <h3 class="modal-title" id="modal-title">可修改模板内容红色部分</h3>        
+    	<button type="button" class="btn btn-outline-close" ng-click="cancel()"><i class="fa fa-remove"></i></button>
+    </div>
+    <div class="modal-body" id="modal-body">
+    	
+    	<div class="order-browse">
+		    <div class="card">
+		        <div class="card-header clearfix">                                
+		            <ul class="order-list-type d-flex float-left">
+		                <li class="list-item active"><a href>模板信息</a></li>
+		            </ul>
+		        </div>
+		        <div class="card-body order-body bg-fb">
+					<form class="table-form bg-fb">
+						<div class="form-group mr-1">
+							<textarea kindeditor class="form-control" ng-model="templateinfo"></textarea>
+						</div>
+						<div class="form-group text-center mt-4">
+					      	<button type="button" class="btn btn-sm ensure mr-1" ng-click="ensure()">确认导入</button>
+							<button type="button" class="btn btn-sm cancel" ng-click="cancel()">关闭</button>
+					    </div>
+			    	</form>
+		        </div>
+		    </div>
+		</div>    	
+    </div>
+</div>

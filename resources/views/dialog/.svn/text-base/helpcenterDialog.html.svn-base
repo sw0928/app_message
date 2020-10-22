@@ -1,0 +1,83 @@
+<div class="modal-demo">   
+    <div class="modal-header justify-content-between">
+        <h3 class="modal-title" id="modal-title">
+        	<ul class="d-flex model-head-list align-items-center">
+        		<li ng-click="switchTab = 1" ng-class="switchTab == 1 ?'active':''">常见问题</li>
+        		<li ng-click="switchTab = 2" ng-class="switchTab == 2 ?'active':''">文档下载</li>
+        		<li ng-click="switchTab = 3" ng-class="switchTab == 3 ?'active':''">查看代码</li>
+        	</ul>
+        </h3>        
+    	<button type="button" class="btn btn-outline-close" ng-click="cancel()"><i class="fa fa-remove"></i></button>
+    </div>
+    <div class="modal-body" id="modal-body">
+    	<div ng-if="switchTab == 1" class="question-list">
+    		
+    	</div>
+    	<div ng-if="switchTab == 2" class="document-list">
+    		<div class="doc-item-cont">
+    			<h4>接口文档</h4>
+	    		<ul>
+	    			<li class="doc-item d-flex justify-content-between">
+	    				<span>HTTP协议4.0.doc</span> <a href="">下载</a>
+	    			</li>
+	    			<li class="doc-item d-flex justify-content-between">
+	    				<span>HTTP协议4.0.doc</span> <a href="">下载</a>
+	    			</li>
+	    		</ul>
+    		</div>
+    		
+    	</div>
+    	<div ng-if="switchTab == 3" class="code-list">
+    		
+    	</div>
+    	<!--<form class="table-form p-2 pb-1 bg-fb mb-2 border d-flex">    		
+			<div class="form-group mr-2 mb-0">			    
+			    <input type="text" class="no-control form-control" placeholder="请输入查询条件">
+			</div>
+			<div class="form-group align-self-end mb-0">
+		      	<button type="submit" class="btn btn-sm ensure mr-1">查询</button>
+				<button type="button" class="btn btn-sm cancel">重置</button>
+		    </div>
+    	</form>
+    	<div class="order-browse">
+		    <div class="card">
+		        <div class="card-header">                                
+		            <ul class="order-list-type d-flex">
+		                <li class="list-item active"><a href>常见问题列表</a></li>
+		            </ul>		            
+		        </div>
+		        <div class="card-body order-body bg-fb">
+					<div class="user-list">
+					  	<div class="table-responsive">
+					  		<table class="table table-list table-hover">
+								<thead>
+								    <tr>
+								      	<th scope="col">问题</th>
+								      	<th scope="col">解答</th>
+								      	<th scope="col">创建时间</th>
+								    </tr>
+								</thead>
+								<tbody>
+								    <tr>
+									    <td>什么是订单提交必须带签名？</td>
+									    <td>内容里必须含有签名，且签名在内容的开头或结尾</td>				    
+									    <td>2016-12-30 00:00:00</td>									   
+									</tr>
+									<tr>
+									    <td>什么是未知号码运营商？</td>
+									    <td>该号码查找不到归属运营商，所以被认定为未知号码</td>				    
+									    <td>2016-12-30 00:00:00</td>									 
+									</tr>
+								</tbody>
+							</table>
+					  	</div>
+					</div>
+		        </div>
+		    </div>
+		</div>   --> 	
+    </div>
+    <!--<div class="modal-footer align-items-center">
+        <button class="btn btn-sm btn-ensure" type="button" ng-click="ensure()">确定</button>
+        <button class="btn btn-sm btn-light btn-light-border" type="button" ng-click="cancel()">取消</button>
+    </div>  -->  
+</div>

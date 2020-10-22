@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>查看报告</title>
+		<link rel="stylesheet" href="../../public/css/common.css" />
+		<link rel="stylesheet" href="../../public/css/layui.css" />
+		<script src="../../public/js/vendor/api.js"></script>
+		<script src="../../public/js/vendor/jquery.min.js"></script>
+		<script src = "https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+		<script src="../../public/js/laydate/laydate.js"></script>
+		<script src="../../public/js/vendor/vue.min.js"></script>
+	</head>
+	<!--[if IE 9]>
+<style>
+    #leftMenu_Box{
+        width: 15.08%;
+        height: 979px;
+        float: left;
+        background: #040b29;
+        position: relative;
+        box-shadow: 0px 8px 20px 0px rgba(0,0,0,0.5);
+    }
+</style>
+<![endif]-->
+	<style>
+		/*#page {*/
+		/*padding: 62px 0 50px 0;*/
+		/*}*/
+		/*.shade_con {
+    height: auto;
+    width: 60%;
+    padding-bottom: 20px;
+  }
+
+  .shade_con1 {
+    width: 1000px;
+    height: auto;
+  }*/
+		#rightTable{
+			width: 100% !important;
+		}
+		#leftMenu_Box .leftMenu ul li div.prop a.prop18 {
+			background-color: #1890FF !important;
+			color: #fff !important;
+		}
+		/*.shade_con1 .temp {
+    height: auto;
+  }*/
+	.addClass2{
+	    border-bottom: 2px solid #3C84D2;
+	    font-size: 20px !important;
+	    color: #000 !important;
+	}	
+		.sw_row tr td,
+		.sw_row tr th {
+			border-right: 1px solid #6E6E6E;
+			text-align: center;
+			line-height: 35px;
+			width: 20%;
+		}
+		/*.sw_row tr td:nth-child(4) div {
+    max-width: 360px;
+  }*/
+		/*.heightScroll {
+    max-height: 300px;
+  }*/
+ 		
+		.layui-input-inline {
+			width: 180px !important;
+		}
+		.table_nav{
+			background: #f3f3f3;
+		}
+		#myChart1,
+		#myChart2,
+		#myChart3,
+		#myChart5,
+		#myChart6
+		 {
+			height: 500px;
+			border-bottom: 1px solid #6E6E6E;
+		}
+		#myChart3,
+		#myChart5,
+		#myChart6
+		 {
+		 	float: left;
+			/*display: inline-block;*/
+			width: 33%;
+		}
+		#myChart4{
+  		height: 540px;
+  	}
+  	
+   @media screen and (min-width: 1600px) {
+     #myChart4{
+  		height: 660px;
+  	}
+   }
+		/*#text2 {
+    width: 912px;
+    height: 67px;
+    margin: 10px 18px 0 0px;
+    border: 1px solid #e2e2e2;
+    box-sizing: border-box;
+    padding: 7px;
+  }
+
+  .ke-container {
+    margin: 10px 0 0 0px !important;
+  }
+
+  .ke-statusbar {
+    display: none;
+  }
+
+  .ke-colorpicker-cell-top {
+    display: none !important;
+  }
+
+  .addClass4 {
+    background: #E1EFFF;
+  }*/
+  .sw_echart h6{
+	  padding: 10px 50px;
+	  color: #666;
+	  font-size: 16px;
+	  cursor: pointer;
+  }
+  .sw_echart h6:hover{  	  
+  	  color: #3e54d8;  	 
+  }
+  .sw_row{
+	      overflow-x: initial;
+  }
+  .sw_time{
+  	display: inline-block;
+    margin-left: 5%;
+  }
+  .sw_time input{
+  	height: 30px;
+    line-height: 30px;
+    width: 100px;
+    font-size: 14px;
+  }
+  .sw_time span{
+  	display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+  }
+  .sw_time span:hover{
+  	color: #F50505;
+  }
+	</style>
+
+	<body>
+		<!--<div id="sw_load">
+    <img src="../../img/load.gif">
+  </div>-->
+		<div class="main-box">
+			<!-- 左侧菜单 -->
+			<div id="rightTable">
+				<v-order-fail></v-order-fail>
+			</div>
+		</div>
+		<div id="shade">
+			<v-tong-ji></v-tong-ji>
+		</div>
+		<div id="shade1">
+			<v-template></v-template>
+		</div>
+		<script type="text/x-template" id="right-template">
+			<div>
+				<div class="table_tou">
+					<h6 class="fl">流量分析</h6>
+
+				</div>
+				<div class="table_nav">
+					<form class="layui-form layui-form-pane" action="" style="border-bottom: 1px solid #6E6E6E;">
+						<div class="layui-inline">
+							<label class="">模板ID</label><br/>
+
+							<div class="layui-input-inline">
+								<input type="text" name="tracId" v-model="data1.tracId" disabled="disabled" style="background: rgb(236, 236, 236); color: rgb(68, 68, 68);" class="layui-input" />
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="">模板内容</label><br/>
+
+							<div class="layui-input-inline">
+								<input type="text" name="template" v-model="template" disabled="disabled" style="background: rgb(236, 236, 236); color: rgb(68, 68, 68);" class="layui-input" />
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="">时间</label><br />
+							<div class="layui-input-inline">
+								<input type="text" name="startDate" class="layui-input" autocomplete="off" id="test" />
+								<img src="../../public/image/Shape.png" alt="" />
+							</div>
+						</div>
+						<!--<div class="layui-inline">
+            <label class="">结束时间</label><br />
+            <div class="layui-input-inline">
+              <input type="text" name="endDate" class="layui-input" autocomplete="off" id="test1"  />
+              <img src="../../img/Shape.png" alt="" />
+            </div>
+          </div>-->
+						<div class="layui-input-inline">
+							<span class="sw_btn1" lay-submit="" lay-filter="demo3">
+                        查询
+                    </span>
+						</div>
+					</form>
+					<div class="sw_row">
+						<h6 class="sw_th">访问统计</h6>
+						<table style="width: 100%">
+							<tr>
+								<th>总浏览量</th>
+								<th>有效点击数</th>
+								<th>无效点击数</th>
+								<th>独立用户数</th>
+								<th style="border-right: none;">IP数</th>
+							</tr>
+							<tr>
+								<td>{{allData.chickNum}}</td>
+								<td>{{allData.effectiveChickNum}}</td>
+								<td>{{allData.unEffectiveChickNum}}</td>
+								<td>{{allData.uvNum}}</td>
+								<td style="border-right: none;">{{allData.ipNum}}</td>
+							</tr>
+
+						</table>
+						<!--<div class="sw_pad8" v-show="mapShow == true">暂无数据</div>-->
+						<div id="myChart1"></div>
+						<h6 class="sw_th">24小时内访问统计
+							<div class="sw_time">
+								<span @click="prev()"><<</span>
+									<div class="layui-input-inline" style="width:100px !important;margin: 0 20px;">
+							      <input type="text" name="time" v-model="time" disabled class="layui-input">
+							    </div>
+								<span @click="next()">>></span>
+							</div>							
+						</h6>						
+						<div id="myChart2"></div>
+						<h6 class="sw_th">访问设备统计</h6>
+						<div id="myChart3"></div>
+						<div id="myChart5"></div>
+						<div id="myChart6"></div>
+						<h6 class="sw_th">
+							<div class="sw_echart">
+								<h6 class="fl one addClass2" data="2">访问IP归属统计</h6>
+							    <h6 class="fl" data="0">下发手机号归属统计</h6>
+							    <h6 class="fl" data="1">访问手机号归属统计</h6>
+								
+							</div>							
+						</h6>
+						<div id="myChart4"></div>
+						<!-- <h6 class="sw_th">被叫归属地统计</h6>
+						<div id="myChart5"></div> -->
+					</div>
+				</div>
+			</div>
+		</script>
+		<script src="../../public/js/vendor/layui.all.js"></script>
+		<script type="text/javascript" src="../../public/js/vendor/echarts.min.js"></script>
+		<script type="text/javascript" src="../../public/js/vendor/china.js"></script> 
+		<script src="../../public/js/vendor/analyze.js"></script>
+		<script>
+			//头部
+			//    var operaAI = new Vue({
+			//        el: "#proMang",
+			//        data: {
+			//            topCurrent: 0
+			//        }
+			//    });
+		//	resource()
+			var rightTable = new Vue({
+				el: "#rightTable"
+			});
+			var shade = new Vue({
+				el: "#shade"
+			});
+			var shade1 = new Vue({
+				el: "#shade1"
+			});
+			$(function() {
+				laydate.render({
+					elem: "#test", //指定元素
+					range: '~',
+					value: getDay(-7) + ' ~ ' + getDay(0),
+					btns: ['confirm']
+
+				});
+//				laydate.render({
+//					elem: "#test1", //指定元素
+//					type: 'datetime',
+//					value: getDay(0) + ' 23:59:59',
+//
+//				});
+				$(document).ready(function() {
+				});
+
+			});
+		</script>
+	</body>
+
+</html>

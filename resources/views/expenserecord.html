@@ -1,0 +1,21 @@
+<div class="order-browse">
+    <div class="card">
+        <div class="card-header clearfix">                                
+            <ul class="order-list-type d-flex float-left">
+                <li ng-if="SysPermission.showTrades()" class="list-item" ui-sref-active="active"><a ui-sref="expenserecord.trades">交易明细</a></li>
+                <li ng-if="SysPermission.showDifferential()" class="list-item" ui-sref-active="active"><a ui-sref="expenserecord.differential">差价返还</a></li>
+            </ul>
+            <div class="order-head-btn float-right d-flex">
+            	<div class="num-text">
+            		<b>{{per.ExpenseCount}}</b> 条记录
+            	</div>
+            	<div class="btn-cont">
+            		<button type="button" ng-if="SysPermission.showExport()" class="btn btn-outline-info btn-sm" ng-click="importUserBalance()"> <i class="fa fa-cloud-download"></i> 导出</button>
+            	</div>
+            </div>
+        </div>
+        <div class="card-body order-body bg-fb">
+			<ui-view></ui-view>
+        </div>
+    </div>
+</div>

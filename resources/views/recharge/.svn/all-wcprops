@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dev/!svn/ver/1681/source/ic-project/trunk/ICCS-h5/st/resources/views/recharge
+END
+querylist.html
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/dev/!svn/ver/1681/source/ic-project/trunk/ICCS-h5/st/resources/views/recharge/querylist.html
+END
+creditflow.html
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dev/!svn/ver/1681/source/ic-project/trunk/ICCS-h5/st/resources/views/recharge/creditflow.html
+END
+processlist.html
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/dev/!svn/ver/1681/source/ic-project/trunk/ICCS-h5/st/resources/views/recharge/processlist.html
+END
+refundflow.html
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dev/!svn/ver/1681/source/ic-project/trunk/ICCS-h5/st/resources/views/recharge/refundflow.html
+END

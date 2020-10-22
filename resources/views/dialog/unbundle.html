@@ -1,0 +1,18 @@
+<div class="modal-header justify-content-between">
+    <h3 class="modal-title" id="modal-title">解绑MFA动态</h3>
+    <button type="button" class="btn btn-outline-close" ng-click="cancel()"><i class="fa fa-remove"></i></button>
+</div>
+<form class="bg-fb">
+    <div class="modal-body" id="modal-body">       
+      <div class="form-row">      	
+		    <div class="form-group col-12">
+		      	<label>动态验证码</label>
+		      	<input type="text" ng-model="basedata.code" class="form-control" placeholder="请输入">
+		    </div>		  
+			</div>        
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button class="btn btn-sm btn-ensure" ng-click="ensure()">确认修改</button>
+        <button class="btn btn-sm btn-light btn-light-border" type="button" ng-click="cancel()">关闭</button>
+    </div>
+</form>

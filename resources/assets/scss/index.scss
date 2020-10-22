@@ -1,0 +1,115 @@
+@import './reset';
+@import './common/loading';
+@import './common/aside';
+@import './common/nav';
+@import './common/form';
+@import './common/table';
+@import './common/dialog';
+
+@import './datacenter';
+@import './submitorder';
+@import './orderbrowse';
+
+body{
+    min-width: 1200px;
+}
+.min-height{
+    min-height: 100%;
+}
+.main-cont{
+    height: calc(100% - 71px);
+    margin: {
+        top: 10px;
+    }  
+}
+.toast-error{
+    background: #bc382a;
+}
+.toast-warning{
+    background: #f48f03;
+}
+.toast-info{
+    background: #4091ac;
+}
+.toast-success{
+    background: #489c50;
+}
+.eye-close-icon{
+    display: inline-block;
+    width: 28px;
+    height: 14px;
+    background: url('../image/eyeclose.png') no-repeat top center;
+    background-size: auto 14px;
+}
+.modal-title{
+    font-size: 22px;   
+}
+.cursor-p{
+    cursor: pointer;
+}
+@media (min-width: 992px){
+    .modal-lg {
+        max-width: 850px !important;
+    }
+}
+@media (min-width: 576px){
+    .modal-dialog {
+        max-width: 600px;
+    }
+}
+.modal-xl{
+    max-width:100%;
+    width:80% !important;
+}
+
+//时间空间
+.wui-date-editor{
+    display: flex !important;
+    flex-wrap: nowrap;
+    .date-icon{
+        position: relative;
+        height: 32px;
+        line-height: 32px;
+        padding: 0 5px;
+        margin-left: -1px;
+        font-size: 18px;
+        text-align: center;
+        color: #738495;
+        border: 1px solid #ced4da;
+        border-radius: 0 4px 4px 0;
+    }
+}
+.wui-input{
+    font-size: 14px !important;
+    color: #000 !important;
+}
+.wui-date-editor .wui-date-input{
+    padding-left: 0.5rem !important;
+    border-radius: 4px 0 0 4px;
+    border-right: 0;
+}
+.wui-date-editor .iconfont{
+    top: calc(50% - 3px);
+}
+.date-input-group button{
+    padding: 0 10px !important;
+}
+.card-header{
+    padding: 0.3rem 1.25rem;
+}
+.form-group{
+    margin-bottom: .5rem;
+}
+.table{
+  margin-bottom: .5rem;
+}
+.table th, .table td{
+    padding: 0.45rem;
+}
+.sw_cardH{
+    height: 325px !important;
+    
+}
+.sw_cardB{
+    height: 300px !important;   
+}

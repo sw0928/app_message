@@ -1,0 +1,17 @@
+<div class="modal-demo ">   
+    <div class="modal-header justify-content-between">
+        <h3 class="modal-title" id="modal-title">新增群组</h3>
+        <button type="button" class="btn btn-outline-close" ng-click="cancel()"><i class="fa fa-remove"></i></button>
+    </div>
+    <form ng-submit="ensure()">   
+	    <div class="modal-body" id="modal-body">
+	    	<div class="form-row">			    
+			    <input type="text" class="form-control" ng-model="groupName" id="name" required placeholder="请输入群组名称">
+			</div>			
+	   	</div>
+	    <div class="modal-footer justify-content-center">	        
+	        <button class="btn btn-sm btn-light btn-light-border" type="button" ng-click="cancel()">关闭</button>
+	        <button class="btn btn-sm btn-ensure" type="submit">新增</button>
+	    </div>
+    </form>
+</div>

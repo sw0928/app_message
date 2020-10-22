@@ -1,0 +1,43 @@
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch-poll": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --watch-poll --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap-sass": "^3.4.0",
+    "cross-env": "^5.1.5",
+    "jquery": "^3.3.1",
+    "laravel-mix": "^4.0.12",
+    "resolve-url-loader": "^2.3.1",
+    "sass": "^1.15.2",
+    "sass-loader": "^7.1.0",
+    "vue-template-compiler": "^2.5.21"
+  },
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.18",
+    "angular": "^1.7.0",
+    "angular-animate": "^1.7.0",
+    "angular-chart.js": "^1.1.1",
+    "angular-resource": "^1.7.0",
+    "angular-sanitize": "^1.7.6",
+    "angular-toastr": "^2.1.1",
+    "bootstrap": "^4.1.1",
+    "echarts": "^4.2.0-rc.2",
+    "font-awesome": "^4.7.0",
+    "kindeditor": "^4.1.10",
+    "layui-laydate": "^5.0.9",
+    "pretty-checkbox": "^3.0.3",
+    "ui-bootstrap4": "^3.0.3",
+    "ui-select": "^0.19.8"
+  }
+}
